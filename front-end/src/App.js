@@ -1,9 +1,13 @@
-
+import { Header } from "./components/Header/Header";
+import { Footer } from "./components/Footer/Footer";
+import Herosection from './components/Herosection/Herosection';
 
 function App() {
   return (
     <div className="App">
-      <p>hejsan</p>
+      <Header />
+      <Herosection />
+      <Footer />
     </div>
   );
 }

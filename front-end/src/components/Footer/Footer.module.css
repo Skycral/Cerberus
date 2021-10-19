@@ -1,0 +1,15 @@
+.Footer {
+  background-color: #ff6b81;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  bottom: 0;
+  left: 0;
+}
+
+.FooterTitle {
+  font-weight: 700;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
