@@ -10,3 +10,5 @@ routes.get("/", async (req, res) => {
       res.status(500).json({status: "nok"});
     }
   });
+
+  module.exports = routes;
