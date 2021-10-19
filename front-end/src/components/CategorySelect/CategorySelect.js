@@ -9,15 +9,15 @@ import MenuItem from "@mui/material/MenuItem";
  * @onChange {Function} a function that runs onChange
  * @value {string} Your current value
  */
-export const FilterSelect = () => ({
+export const CategorySelect = ({
     categories = [],
     onChange = () => {
       console.log("category changed");
     },
     value = "",
   }) => {
-    const categoryMenuItems = categories.map((item) => (
-      <MenuItem key={`category-${item.id}`} value={item.id}>
+    const categoryMenuItems = categories.map((item, key) => (
+      <MenuItem key={`category-${key}`} value={item.category}>
         {item.category}
       </MenuItem>
     ));
