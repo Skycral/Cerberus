@@ -26,10 +26,16 @@ routes.get("/categories", async (req, res) => {
   }
 });
 
-routes.get("/:params", async (req, res) => {
+routes.get("/:activity", async (req, res) => {
   try {
-    const acts = await db.getActivites();
-    res.send(acts);
+    console.log(req.params.activity)
+    const acts = await db.getActivites(req.params.activity);
+    console.log('hej', acts)
+    if (acts) {
+      res.send(acts);
+    } else {
+      res.status(404).send({status: "nok", msg: `This activity could not be found.`});
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({status: "nok"});
