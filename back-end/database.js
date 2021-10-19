@@ -11,8 +11,7 @@ const openDb = async () => {
 const getCities = async () => {
   try {
     const dbCon = await openDb();
-    // const query = "SELECT cities.city, activities.activity, activities.category FROM cityactivities JOIN cities ON cities.cityCode = cityactivities.codeCity JOIN activities ON activities.activityId = cityactivities.idActivity ORDER BY cities.city ASC;";
-    const query = "SELECT city FROM cities;";
+    const query = "SELECT city FROM cities ORDER BY city ASC;";
     const result = await dbCon.all(query);
     return result;
   } catch(error) {
@@ -38,10 +37,17 @@ const getCategories = async () => {
   return await dbCon.all(query);
 };
 
-const getActivites = async () => {
-  const dbCon = await openDb();
-  const query = "";
-  return await dbCon.all(query);
+const getActivites = async (activity) => {
+  console.log(activity)
+  try {
+    const dbCon = await openDb();
+    // const query = "SELECT city FROM cities WHERE city=?"
+    const query = "SELECT cities.city, activities.activity, activities.category FROM cityactivities INNER JOIN cities ON cities.cityCode = cityactivities.codeCity INNER JOIN activities ON activities.activityId = cityactivities.idActivity WHERE activities.activity=?"
+    const result = await dbCon.all(query, [activity]);
+    return result;
+  } catch (error){
+    console.log(error)
+  }  
 };
 
 module.exports = {
