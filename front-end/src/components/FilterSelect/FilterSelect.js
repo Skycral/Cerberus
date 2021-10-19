@@ -10,10 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
  * @value {string} Your current value
  */
 export const FilterSelect = () => ({
-    categories = [{
-        id: 1,
-        category: 'BAD'
-    }],
+    categories = [],
     onChange = () => {
       console.log("category changed");
     },
