@@ -2,6 +2,7 @@ import { Typography, Box, Button} from "@mui/material";
 import { CategorySelect } from '../CategorySelect/CategorySelect'
 import { DateSelect } from '../DateSelect/DateSelect'
 import { useState, useEffect } from "react";
+import settings from '../../settings.json'
 
 function Herosection() {
     const [categories, setCategories] = useState("");
@@ -14,18 +15,16 @@ function Herosection() {
 
     const fetchCategories = async () => {
         const response = await (
-          await fetch(`http://localhost:3333/categories`)
+          await fetch(`${settings.backend}/categories`)
         ).json();
         setCategories(response);
       };
-      console.log(categories)
 
       const handleClick = async (category) => {
-        const response = await (await fetch(`http://localhost:3333/${category}`)).json();
+        const response = await (await fetch(`${settings.backend}/${category}`)).json();
           setResult(response);
 
         };
-        console.log(result)
     // const fetchWeather = async () => {
     //     const response = await (
     //       await fetch(`http://localhost:3000/weather`)
