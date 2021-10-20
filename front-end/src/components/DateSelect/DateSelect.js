@@ -6,11 +6,12 @@ import MonthPicker from './MonthPicker'
 export function DateSelect() {
     const d = new Date();
     let year = d.getFullYear();
+    
 
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [startYear, setStartYear] = useState(year);
-    const [endYear, setEndYear] = useState(year);
+    const [endYear, setEndYear] = useState(year); // +1
 
     const [date, setDate] = useState();
     const [days, setDays] = useState();
@@ -32,7 +33,7 @@ export function DateSelect() {
     const sameYear = async () => {
         const response = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${startYear}/${startMonth ? startMonth : ''}`);
         const parsing = await response.json();
-
+        
         const filter = parsing.dagar.filter((e) => {
             if (e.datum >= startDate && e.datum <= endDate) {
                 return e;
@@ -49,7 +50,7 @@ export function DateSelect() {
         let arr = []
         let numOfDays = 0;
         let maxNumberOfDays = 0;
-        let topPickArray = [];
+        let topPickArray = []; // Denna array innehåller i sin tur arrayer med de bästa perioderna att ta ledigt
 
         for(let i = 0; i < date.length; i++) {
             arr.push(date[i]);
@@ -57,7 +58,10 @@ export function DateSelect() {
                 arr.forEach(e => e['arbetsfri dag'] === 'Ja' ? numOfDays += 1 : '');
                 if (numOfDays > maxNumberOfDays) {
                     maxNumberOfDays = numOfDays;
-                    topPickArray = [...arr];
+                    topPickArray = [[...arr]];
+                } else if (numOfDays === maxNumberOfDays) {
+                    console.log(numOfDays, arr);
+                    topPickArray.push([...arr]);
                 }
                 numOfDays = 0;
             }
@@ -67,6 +71,7 @@ export function DateSelect() {
         }
         setResult(topPickArray)
     }
+
 
     // const differentYear = async () => {
     //     const firstYear = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${startYear}`);
