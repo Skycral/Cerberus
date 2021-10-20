@@ -41,8 +41,7 @@ const getActivites = async (activity) => {
   console.log(activity)
   try {
     const dbCon = await openDb();
-    // const query = "SELECT city FROM cities WHERE city=?"
-    const query = "SELECT cities.city, activities.activity, activities.category FROM cityactivities INNER JOIN cities ON cities.cityCode = cityactivities.codeCity INNER JOIN activities ON activities.activityId = cityactivities.idActivity WHERE activities.activity=?"
+    const query = "SELECT cities.city, activities.category FROM cityactivities INNER JOIN cities ON cities.cityCode = cityactivities.codeCity INNER JOIN activities ON activities.activityId = cityactivities.idActivity WHERE activities.category=? GROUP BY cities.city;"
     const result = await dbCon.all(query, [activity]);
     return result;
   } catch (error){
