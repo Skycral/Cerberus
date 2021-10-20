@@ -2,37 +2,35 @@ import { useEffect, useState } from 'react';
 import settings from '../../settings.json';
 
 
-export function EventFetch() {
+export function CityFetch() {
 
   // "OBJEKTET"
-  const city = 'Stockholm';
+  const city = 'Sundsvall';
 
   const [result, setResult] = useState();
   
   const fetcher = () => {
-    fetch(`https://sv.wikipedia.org/api/rest_v1/page/summary/${city}`)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setResult(data);
-          })
-        .catch(e => console.log(e));
+    fetch(`${settings.backend}/city/${city}`, {
+      headers: {'accept' : 'application/json'}
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setResult(data);
+        })
+      .catch(e => console.log(e));
   };
-
 
     console.log(result)
 
-    
   useEffect(() => {fetcher()}, []);
 
-  return(
-    <>
-    <h1>{city}</h1>
-    {eventDiv.innerHTML += `<p>${data.extract}</p><img src=${data.originalimage.source} alt=${data.description}>`}
-    </>
-
+  return (
+    <div>
+      <h1>{city}</h1>
+      <p>{result ? result.extract : ''}</p>
+      {result ? <img src={result.originalimage.source} alt={result.description}></img> : ''}
+    </div>
   );
-
 
 }
 
