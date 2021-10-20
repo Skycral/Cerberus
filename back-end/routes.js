@@ -1,4 +1,6 @@
 const routes = require("express").Router();
+const axios = require("axios");
+const { ticketmaster } = require("./config");
 const db = require("./database");
 
 
@@ -26,11 +28,24 @@ routes.get("/categories", async (req, res) => {
   }
 });
 
-routes.get("/:activity", async (req, res) => {
+
+routes.get("/events/:start/:end/:city/:country/:page?", async (req, res) => {
+  try {
+    const url = `https://app.ticketmaster.com/discovery/v2/events?apikey=${ticketmaster}&locale=*&startDateTime=${req.params.start}&endDateTime=${req.params.end}&sort=date,asc&city=${req.params.city}&countryCode=${req.params.country}&size=10&page=${req.params.page}`;
+    const headers = {headers: {accept: 'application/json', 'content-type': 'application/json', "User-Agent": "Axios 0.21.1"}};
+    const result = await axios.get(url, headers);
+    console.log(result.data);
+    res.json(result.data);
+    
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+routes.get("/activities/:activity", async (req, res) => {
   try {
     console.log(req.params.activity)
     const acts = await db.getActivites(req.params.activity);
-    console.log('hej', acts)
     if (acts) {
       res.send(acts);
     } else {
@@ -41,5 +56,6 @@ routes.get("/:activity", async (req, res) => {
     res.status(500).json({status: "nok"});
   }
 });
+
 
 module.exports = routes;

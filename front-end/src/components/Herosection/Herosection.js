@@ -2,6 +2,7 @@ import { Typography, Box, Button} from "@mui/material";
 import { CategorySelect } from '../CategorySelect/CategorySelect'
 import { DateSelect } from '../DateSelect/DateSelect'
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import settings from '../../settings.json'
 
 function Herosection() {
@@ -33,6 +34,7 @@ function Herosection() {
 
     return (
         <Box noValidate autoComplete="off" sx={{marginBottom: '100px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+        <Link to='/page'>Singelsida</Link>
         <Typography variant="h5" >Sök här</Typography>
         <DateSelect />
         {categories ? (
