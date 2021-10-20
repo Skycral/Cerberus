@@ -6,7 +6,7 @@ export function EventFetch() {
 
   // "OBJEKTET"
   const countryCode = 'SE';
-  const city = 'Stockholm';
+  const city = 'Goteborg';
   const startDate = '2021-10-20T00:00:00Z';
   const endDate = '2021-10-29T23:59:59Z';
   const familyFriendly = 'yes'; //yes, no, only -> ONLY verkar inte funka i Sverige
