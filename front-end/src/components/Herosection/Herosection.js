@@ -22,7 +22,7 @@ function Herosection() {
       };
 
       const handleClick = async (category) => {
-        const response = await (await fetch(`${settings.backend}/${category}`)).json();
+        const response = await (await fetch(`${settings.backend}/activities/${category}`)).json();
           setResult(response);
 
         };
