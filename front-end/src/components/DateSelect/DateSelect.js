@@ -1,12 +1,16 @@
 import { TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
+import MonthPicker from './MonthPicker'
+
 
 export function DateSelect() {
+    const d = new Date();
+    let year = d.getFullYear();
 
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
-    const [startYear, setStartYear] = useState();
-    const [endYear, setEndYear] = useState();
+    const [startYear, setStartYear] = useState(year);
+    const [endYear, setEndYear] = useState(year);
 
     const [date, setDate] = useState();
     const [days, setDays] = useState();
@@ -23,12 +27,16 @@ export function DateSelect() {
         setEndYear(value.substring(0, 4))
     }
 
+    const startMonth = ''
+
     const sameYear = async () => {
-        const response = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${startYear}`);
+        const response = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${startYear}/${startMonth ? startMonth : ''}`);
         const parsing = await response.json();
 
         const filter = parsing.dagar.filter((e) => {
             if (e.datum >= startDate && e.datum <= endDate) {
+                return e;
+            } else if (!startDate && !endDate) {
                 return e;
             } else {
                 return '';
@@ -60,34 +68,37 @@ export function DateSelect() {
         setResult(topPickArray)
     }
 
-    console.log(result);
-
-    const differentYear = async () => {
-        const firstYear = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${startYear}`);
-        const secondYear = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${endYear}`);
-        const parsingFirst = await firstYear.json();
-        const parsingSecond = await secondYear.json();
-        console.log(parsingFirst.cachetid, parsingSecond.cachetid);
-    }
+    // const differentYear = async () => {
+    //     const firstYear = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${startYear}`);
+    //     const secondYear = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${endYear}`);
+    //     const parsingFirst = await firstYear.json();
+    //     const parsingSecond = await secondYear.json();
+    //     console.log(parsingFirst.cachetid, parsingSecond.cachetid);
+    // }
 
     useEffect(() => {
         if(startYear && endYear && startYear === endYear) {
             sameYear(startYear);
-        } else if (startYear && endYear) {
-            differentYear(startYear, endYear);
-        }
+        } 
+        // else if (startYear && endYear) {
+        //     differentYear(startYear, endYear);
+        // }
     },[startYear, endYear])
 
-    console.log(date)
-    
+    console.log(result)
+
     return(
         <div>
-            <TextField type="number "label='Antal dagar' onChange={(e) => setDays(e.target.value)}/>
+            <TextField type="number "label={'Antal dagar'} onChange={(e) => setDays(e.target.value)}/>
+
+
             <form>
-                <input type="date" id="startDate" onChange={(e) => startHandler(e.target.value)}/>
-                <input type="date" id="endDate" onChange={(e) => endHandler(e.target.value)}/>
+                <input className='Date' type="date" id="startDate" onChange={(e) => startHandler(e.target.value)}/>
+                <input className='Date' type="date" id="endDate" onChange={(e) => endHandler(e.target.value)}/>
             </form>
-        <button onClick={() => {handleClick(days, date)}}>Sök</button>
+            <MonthPicker />
+            
+        <button onClick={() => {if (days, date) {handleClick(days, date)} else {console.log('Input not set')} }}>Sök</button>
         </div>
     );
 }
