@@ -43,14 +43,13 @@ routes.get("/events/:start/:end/:city/:country/:page?", async (req, res) => {
 
 routes.get("/city/:city", async (req, res) => {
   try {
-    const url = `https://sv.wikipedia.org/api/rest_v1/page/summary/${req.params.city}`;
-    const headers = {headers: {accept: 'application/json', 'content-type': 'application/json', "User-Agent": "Axios 0.21.1"}};
-    const result = await axios.get(url, headers);
-    res.json(result.data);
-    
+      const url = `https://sv.wikipedia.org/api/rest_v1/page/summary/${req.params.city}`;
+      const newUrl = encodeURI(url);
+      const headers = {headers: {accept: 'application/json', 'content-type': 'application/json', "User-Agent": "Axios 0.21.1"}};
+      const result = await axios.get(newUrl, headers);
+      res.json(result.data);
   } catch (error) {
     console.log('Det blir fel');
-    // console.log(req.params.city);
   }
 });
 
