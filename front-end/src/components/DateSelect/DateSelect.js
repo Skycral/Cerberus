@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-export function DateSelect() {
+export function DateSelect(props) {
 
     // JOBBAR MED DAGENS DATUM ------------------------------------------------------
 
@@ -58,26 +58,25 @@ export function DateSelect() {
         };
     }, [days, freeDays])
 
-    useEffect(() => {console.log('full range', dateRange)}, [dateRange]);
+    // Nedan useEffect fyller ingen funktion, förutom att logga vilken range som sökresultaten baseras på
+    //useEffect(() => {console.log('full range', dateRange)}, [dateRange]);
 
     //FUNKTIONER ------------------------------------------------------
 
     const startHandler = (value) => {
         setStartDate(value);
         setStartYear(value.substring(0, 4));
-        console.log('start', value);
+        //console.log('start', value);
     }
 
     const endHandler = (value) => {
         setEndDate(value);
         setEndYear(value.substring(0, 4));
-        console.log('slut', endDate, value);
+        //console.log('slut', endDate, value);
     }
 
-    //const startMonth = '';
-
     const getDateRange = async () => {
-        const responseFirst = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${startYear}`); ///${startMonth ? startMonth : ''}
+        const responseFirst = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${startYear}`);
         const parsingFirst = await responseFirst.json();
         let twoYears = false;
         let filterSecond = [];
@@ -91,7 +90,7 @@ export function DateSelect() {
             }
         });
 
-        console.log('filterfirst', filterFirst);
+        //console.log('filterfirst', filterFirst);
 
         if (twoYears) {
             const responseSecond = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${endYear}`);
@@ -104,7 +103,7 @@ export function DateSelect() {
                     return '';
                 }
             });
-            console.log('filtersecond', filterSecond);
+            //console.log('filtersecond', filterSecond);
         }
 
         if (twoYears) {
@@ -140,7 +139,11 @@ export function DateSelect() {
         setResult(topPickArray)
     }
 
-    console.log('result', result)
+    const setPeriod = (start, end) => {
+        props.func(start, end);
+    };
+
+    //console.log('result', result)
 
     return(
         <div>
@@ -148,7 +151,11 @@ export function DateSelect() {
 
             <p>{userMessage}</p>
             {result ? result.map((e, i) => { 
-                return <button key={`period-${i}`}>{e[0].datum} - {e[e.length-1].datum}</button>}) : ''}
+                const start = `${e[0].datum}`
+                const end = `${e[e.length-1].datum}`;
+                return <button key={`period-${i}`} onClick={() => setPeriod(start, end)}>{`${start} - ${end}`}</button>
+            }) 
+            : ''}
 
             {result ? <p>Passar det inte riktigt? Ange en tidsperiod nedan för att smalna av sökningen:</p> : ''}
 
