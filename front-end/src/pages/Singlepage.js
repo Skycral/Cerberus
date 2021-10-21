@@ -9,10 +9,9 @@ export function SinglePage(props) {
   return(
     <>
     <Link to="/">Tillbaka</Link>
-
-    <CityFetch obj={props.searchObj}/>
-    <EventFetch obj={props.searchObj}/>
+    <CityFetch />
     <ActivityFetch />
+    <EventFetch />
     </>
   );
 };
