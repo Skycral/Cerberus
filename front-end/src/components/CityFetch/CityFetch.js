@@ -5,7 +5,7 @@ import settings from '../../settings.json';
 export function CityFetch() {
 
   // "OBJEKTET"
-  const city = 'Sundsvall';
+  const city = 'Malmö';
 
   const [result, setResult] = useState();
   
@@ -13,6 +13,7 @@ export function CityFetch() {
     fetch(`${settings.backend}/city/${city}`, {
       headers: {'accept' : 'application/json'}
     })
+    // fetch(`https://sv.wikipedia.org/api/rest_v1/page/summary/${city}`)
       .then((res) => res.json())
       .then((data) => {
         setResult(data);
@@ -25,10 +26,12 @@ export function CityFetch() {
   useEffect(() => {fetcher()}, []);
 
   return (
-    <div>
-      <h1>{city}</h1>
-      <p>{result ? result.extract : ''}</p>
-      {result ? <img src={result.originalimage.source} alt={result.description}></img> : ''}
+    <div className='cityfetch'>
+      {result ? <img className='cityfetchImg' src={result.originalimage.source} alt={result.description}></img> : ''}
+      <div className='cityfetchText'>
+        <h1>{city}</h1>
+        <p>{result ? result.extract : ''}</p>
+      </div>
     </div>
   );
 

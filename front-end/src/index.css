@@ -12,3 +12,22 @@ code {
     monospace;
 }
 
+.cityfetch {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  padding: 2rem;  
+}
+
+.cityfetchImg {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 50%;
+  margin-right: 2rem;
+  align-self: center;
+}
+
+.cityfetchText {
+  align-self: center;
+}
