@@ -1,14 +1,17 @@
 import { Typography, Box, Button} from "@mui/material";
 import { CategorySelect } from '../CategorySelect/CategorySelect'
+import { TravelSelect } from '../TravelSelect/TravelSelect'
 import { DateSelect } from '../DateSelect/DateSelect'
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import settings from '../../settings.json'
 
 function Herosection() {
-  const [categories, setCategories] = useState("");
-  const [category, setCategory] = useState();
-  const [result, setResult] = useState([]);
+    const [categories, setCategories] = useState("");
+    const [category, setCategory] = useState();
+    const [company, setCompany] = useState();
+    const [result, setResult] = useState([]);
+
 
   useEffect(() => {
       fetchCategories();
@@ -50,6 +53,9 @@ function Herosection() {
         ) : (
       <p>Laddar filter...</p>
       )}
+
+        <TravelSelect sx={{width: '50%'}} onChange={(e) => setCompany(e.target.value)} value={company ? company : ''}/>
+
       <Button 
           sx={{ width: '50%'}} 
           variant="contained"
@@ -63,5 +69,6 @@ function Herosection() {
     </Box>
   );
 }
+
   
   export default Herosection;

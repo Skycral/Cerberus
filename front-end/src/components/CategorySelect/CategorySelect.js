@@ -24,7 +24,7 @@ export const CategorySelect = ({
   
     return (
       <FormControl fullWidth>
-        <InputLabel id="simple-select-label">Category</InputLabel>
+        <InputLabel id="simple-select-label">Resekategori</InputLabel>
         <Select
           labelId="simple-select-label"
           value={value}
