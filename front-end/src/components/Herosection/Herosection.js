@@ -7,22 +7,11 @@ import { Link } from 'react-router-dom';
 import settings from '../../settings.json'
 
 function Herosection() {
-<<<<<<< HEAD
-<<<<<<< HEAD
     const [categories, setCategories] = useState("");
     const [category, setCategory] = useState();
     const [company, setCompany] = useState();
     const [result, setResult] = useState([]);
-=======
-  const [categories, setCategories] = useState("");
-  const [category, setCategory] = useState();
-  const [result, setResult] = useState([]);
->>>>>>> main
-=======
-  const [categories, setCategories] = useState("");
-  const [category, setCategory] = useState();
-  const [result, setResult] = useState([]);
->>>>>>> main
+
 
   useEffect(() => {
       fetchCategories();
@@ -64,12 +53,10 @@ function Herosection() {
         ) : (
       <p>Laddar filter...</p>
       )}
-<<<<<<< HEAD
+
         <TravelSelect sx={{width: '50%'}} onChange={(e) => setCompany(e.target.value)} value={company ? company : ''}/>
-        <Button 
-=======
+
       <Button 
->>>>>>> main
           sx={{ width: '50%'}} 
           variant="contained"
           onClick={() => handleClick(category)}>
@@ -82,9 +69,6 @@ function Herosection() {
     </Box>
   );
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> main
   
   export default Herosection;
