@@ -32,7 +32,7 @@ export function ActivityFetch() {
     <div className='activityfetch'>
       {image ? <img src={image} alt='hej'></img> : ''}
       <div>
-        <h1>{result.results[0].name}</h1>
+      <h1>{result ? result.results[0].name : ''}</h1>
         <p></p>
       </div>
     </div>

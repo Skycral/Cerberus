@@ -139,9 +139,6 @@ export function DateSelect(props) {
         setResult(topPickArray)
     }
 
-    const setPeriod = (start, end) => {
-        props.func(start, end);
-    };
 
     //console.log('result', result)
 
@@ -153,7 +150,7 @@ export function DateSelect(props) {
             {result ? result.map((e, i) => { 
                 const start = `${e[0].datum}`
                 const end = `${e[e.length-1].datum}`;
-                return <button key={`period-${i}`} onClick={() => setPeriod(start, end)}>{`${start} - ${end}`}</button>
+                return <button key={`period-${i}`} onClick={() => props.func(start, end)}>{`${start} - ${end}`}</button>
             }) 
             : ''}
 

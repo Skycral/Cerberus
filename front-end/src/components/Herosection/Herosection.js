@@ -29,24 +29,24 @@ function Herosection(props) {
   // UPPDATERAR SÖKOBJEKTET ---------------------------------------------
 
   useEffect(() => {
-    setSearchObject({...searchObject, ...{startDate: start}});
+    setSearchObject({...searchObject, startDate: start});
   }, [start]);
 
   useEffect(() => {
-    setSearchObject({...searchObject, ...{endDate: end}});
+    setSearchObject({...searchObject, endDate: end});
   }, [end]);
 
   useEffect(() => {
-    setSearchObject({...searchObject, ...{category: category}});
+    setSearchObject({...searchObject, category: category});
   }, [category]);
 
   
   useEffect(() => {
-    setSearchObject({...searchObject, ...{company: company}});
+    setSearchObject({...searchObject, company: company});
   }, [company]);
 
   useEffect(() => {
-    setSearchObject({...searchObject, ...{city: city}});
+    setSearchObject({...searchObject, city: city});
   }, [city]);
 
   useEffect(() => {
@@ -126,3 +126,4 @@ function Herosection(props) {
 }
 
   export default Herosection;
+

@@ -4,7 +4,7 @@ import settings from '../../settings.json';
 
 export function EventFetch(props) {
 
-  console.log('hanna', props.obj);
+  console.log('hanna i event', props.obj);
 
   // "OBJEKTET"
   const searchObject = {

@@ -11,7 +11,7 @@ export function SinglePage(props) {
     <Link to="/">Tillbaka</Link>
     <CityFetch />
     <ActivityFetch />
-    <EventFetch />
+    <EventFetch obj={props.searchObj}/>
     </>
   );
 };
