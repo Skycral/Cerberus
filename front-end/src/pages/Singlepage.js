@@ -4,14 +4,14 @@ import { EventFetch } from "../components/EventFetch/EventFetch";
 import { Link } from "react-router-dom";
 
 
-export function SinglePage() {
-
+export function SinglePage(props) {
+  console.log('hej', props.searchObj);
   return(
     <>
     <Link to="/">Tillbaka</Link>
     <CityFetch />
     <ActivityFetch />
-    <EventFetch />
+    <EventFetch obj={props.searchObj}/>
     </>
   );
 };
