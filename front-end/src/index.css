@@ -20,13 +20,13 @@ code {
   padding: 2rem;  
 }
 
-.cityfetchImg {
-  max-width: 200px;
-  max-height: 200px;
+.cityfetch img {
+  width: 200px;
   border-radius: 50%;
   margin-right: 2rem;
   align-self: center;
 }
+
 
 .cityfetchText {
   align-self: center;
