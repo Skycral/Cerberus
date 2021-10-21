@@ -1,6 +1,6 @@
 const routes = require("express").Router();
 const axios = require("axios");
-const { ticketmaster } = require("./config");
+const { ticketmaster, googleKey } = require("./config");
 const db = require("./database");
 
 
@@ -51,6 +51,32 @@ routes.get("/city/:city", async (req, res) => {
   } catch (error) {
     console.log('Det blir fel');
   }
+});
+
+
+
+routes.get("/places/:what/:city", async (req, res) => {
+  try {
+  const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.params.what}%20in%20${req.params.city}&key=${googleKey}`
+  const config = {
+    method: 'get',
+    url: encodeURI(url),
+    headers: { }
+  };
+  const result = await axios(config);
+  console.log(result.data.results[0].photos[0]['photo_reference'])
+  const imageUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${result.data.results[0].photos[0]['photo_reference']}&key=${googleKey}`
+  const imageConfig = {
+    method: 'get',
+    url: imageUrl,
+    header: { }
+  }
+  const imageResult = await axios(imageConfig);
+  res.json({resultat: result.data, foto: imageResult.request._redirectable._options.href});
+  // res.json(result.data);
+  } catch (error) {
+  console.log(error);
+  };
 });
 
 routes.get("/weather/:start/:end/:city", async (req, res) => {
