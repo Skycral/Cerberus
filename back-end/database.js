@@ -37,12 +37,14 @@ const getCategories = async () => {
   return await dbCon.all(query);
 };
 
-const getActivites = async (activity) => {
-  console.log(activity)
+const getActivities = async (category) => {
+  console.log(category)
   try {
     const dbCon = await openDb();
-    const query = "SELECT cities.city, activities.category FROM cityactivities INNER JOIN cities ON cities.cityCode = cityactivities.codeCity INNER JOIN activities ON activities.activityId = cityactivities.idActivity WHERE activities.category=? GROUP BY cities.city;"
-    const result = await dbCon.all(query, [activity]);
+    // const query = "SELECT cities.cityName, categories.category FROM cityactivities INNER JOIN cities ON cities.cityName = cityactivities.city INNER JOIN activities ON activities.activityId = cityactivities.actId WHERE categories.category=? GROUP BY cities.cityName;"
+    const query = "SELECT cities.cityName, activities.activity FROM cityactivities INNER JOIN cities ON cities.cityCode = cityactivities.city INNER JOIN activities ON activities.activityId = cityactivities.actId INNER JOIN categories ON categories.categoryId = cityactivities.catId WHERE categories.category=? GROUP BY cities.cityName;"
+    const result = await dbCon.all(query, [category]);
+    console.log(result);
     return result;
   } catch (error){
     console.log(error)
@@ -53,5 +55,5 @@ module.exports = {
   getCities,
   searchCity,
   getCategories,
-  getActivites
+  getActivities
 };

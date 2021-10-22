@@ -99,14 +99,14 @@ routes.get("/weather/:start/:end/:city", async (req, res) => {
   }
 });
 
-routes.get("/activities/:activity", async (req, res) => {
+routes.get("/activities/:category", async (req, res) => {
   try {
-    console.log(req.params.activity)
-    const acts = await db.getActivites(req.params.activity);
+    console.log(req.params.category)
+    const acts = await db.getActivities(req.params.category);
     if (acts) {
       res.send(acts);
     } else {
-      res.status(404).send({status: "nok", msg: `This activity could not be found.`});
+      res.status(404).send({status: "nok", msg: `No activities could be found.`});
     }
   } catch (error) {
     console.log(error);

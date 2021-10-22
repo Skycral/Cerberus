@@ -16,7 +16,6 @@ export function CityFetch() {
     fetch(`${settings.backend}/city/${city}`, {
       headers: {'accept' : 'application/json'}
     })
-    // fetch(`https://sv.wikipedia.org/api/rest_v1/page/summary/${city}`)
       .then((res) => res.json())
       .then((data) => {
         setResult(data);

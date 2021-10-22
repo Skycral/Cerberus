@@ -115,8 +115,8 @@ function Herosection(props) {
       </Button>
       {result ? result.map((e, i) => {
           return (
-            <Link key={`res-${i}`} to='/page' onMouseEnter={() => handleResultClick(e.city)}>
-              <Typography variant="h5">{e.city}</Typography>
+            <Link key={`res-${i}`} to='/page' onMouseEnter={() => handleResultClick(e.cityName)}>
+              <Typography variant="h5">{e.cityName}</Typography>
             </Link>
             );
       }) : ''}
