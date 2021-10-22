@@ -3,7 +3,6 @@ const axios = require("axios");
 const { ticketmaster, googleKey } = require("./config");
 const db = require("./database");
 
-
 routes.get("/", async (req, res) => {
   try {
     if (req.query.city) {
@@ -57,14 +56,23 @@ routes.get("/city/:city", async (req, res) => {
 
 routes.get("/places/:what/:city", async (req, res) => {
   try {
-  const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.params.what}%20in%20${req.params.city}&key=${googleKey}`
+  const geoUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${req.params.city}&region=se&key=${googleKey}`
+  const geoConfig = {
+    method: 'get',
+    url: encodeURI(geoUrl),
+    headers: { }
+  };
+  const geoResult = await axios(geoConfig);
+  console.log(geoResult.data.results[0].geometry.location)
+
+  const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?location=${geoResult.data.results[0].geometry.location.lat}00%2C${geoResult.data.results[0].geometry.location.lng}00&radius=20000&query=${encodeURI(req.params.what)}&key=${googleKey}`
   const config = {
     method: 'get',
-    url: encodeURI(url),
+    url: url,
     headers: { }
   };
   const result = await axios(config);
-  console.log(result.data.results[0].photos[0]['photo_reference'])
+
   const imageUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${result.data.results[0].photos[0]['photo_reference']}&key=${googleKey}`
   const imageConfig = {
     method: 'get',
@@ -106,5 +114,5 @@ routes.get("/activities/:activity", async (req, res) => {
   }
 });
 
-
+  
 module.exports = routes;

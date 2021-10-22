@@ -5,8 +5,8 @@ import settings from '../../settings.json';
 export function ActivityFetch() {
 
   // "OBJEKTET"
-  const activity = 'Nöjespark'
-  const city = 'Stockholm';
+  const activity = 'nöjespark'
+  const city = 'Skara';
 
   const [result, setResult] = useState();
   const [image, setImage] = useState();
