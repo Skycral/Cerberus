@@ -30,8 +30,11 @@ routes.get("/categories", async (req, res) => {
 
 routes.get("/events/:start/:end/:city/:country/:page?", async (req, res) => {
   try {
-    const url = `https://app.ticketmaster.com/discovery/v2/events?apikey=${ticketmaster}&locale=*&startDateTime=${req.params.start}&endDateTime=${req.params.end}&sort=date,asc&city=${req.params.city}&countryCode=${req.params.country}&size=10&page=${req.params.page}`;
-    const headers = {headers: {accept: 'application/json', 'content-type': 'application/json', "User-Agent": "Axios 0.21.1"}};
+
+    const url = `https://app.ticketmaster.com/discovery/v2/events?apikey=${ticketmaster}&locale=*&startDateTime=${req.params.start}&endDateTime=${req.params.end}&sort=date,asc&city=${encodeURI(req.params.city)}&countryCode=${req.params.country}&size=10&page=${req.params.page}`;
+    const headers = {
+      headers: {accept: 'application/json', 'content-type': 'application/json', "User-Agent": "Axios 0.21.1"}
+    };
     const result = await axios.get(url, headers);
     res.json(result.data);
     
@@ -44,7 +47,9 @@ routes.get("/city/:city", async (req, res) => {
   try {
       const url = `https://sv.wikipedia.org/api/rest_v1/page/summary/${req.params.city}`;
       const newUrl = encodeURI(url);
-      const headers = {headers: {accept: 'application/json', 'content-type': 'application/json', "User-Agent": "Axios 0.21.1"}};
+      const headers = {
+        headers: {accept: 'application/json', 'content-type': 'application/json', "User-Agent": "Axios 0.21.1"}
+      };
       const result = await axios.get(newUrl, headers);
       res.json(result.data);
   } catch (error) {

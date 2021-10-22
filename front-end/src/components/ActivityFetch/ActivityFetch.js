@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import settings from '../../settings.json';
 
 
-export function ActivityFetch() {
+export function ActivityFetch(props) {
 
   // "OBJEKTET"
   const activity = 'nöjespark'
-  const city = 'Skara';
+  const city = props.obj.city;
 
   const [result, setResult] = useState();
   const [image, setImage] = useState();

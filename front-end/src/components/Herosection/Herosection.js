@@ -29,12 +29,8 @@ function Herosection(props) {
   // UPPDATERAR SÖKOBJEKTET ---------------------------------------------
 
   useEffect(() => {
-    setSearchObject({...searchObject, startDate: start});
-  }, [start]);
-
-  useEffect(() => {
-    setSearchObject({...searchObject, endDate: end});
-  }, [end]);
+    setSearchObject({...searchObject, endDate: end, startDate: start});
+  }, [start, end]);
 
   useEffect(() => {
     setSearchObject({...searchObject, category: category});
