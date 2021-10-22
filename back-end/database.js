@@ -33,7 +33,7 @@ const searchCity = async (search) => {
 
 const getCategories = async () => {
   const dbCon = await openDb();
-  const query = "SELECT category FROM activities GROUP BY category ORDER BY category ASC";
+  const query = "SELECT category FROM categories GROUP BY category ORDER BY category ASC";
   return await dbCon.all(query);
 };
 
