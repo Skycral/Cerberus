@@ -42,10 +42,7 @@ export function WeatherSelect() {
 
   return(
     <>
-    <h2>Event i {city} mellan {startDate.substring(0, 10)} och {endDate.substring(0, 10)}</h2>
-    {result ? result.map((e, i) => { 
-    return <p key={`event-${i}`}><a href={e.url} target="_blank">{e.dates.start.localDate}, kl. {e.dates.start.localTime.substring(0,5)} - {e.name}</a></p>
-  }) : ''}
+    <h2>{}</h2>
     </>
 
   );
