@@ -5,10 +5,10 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 
 
-export function CityFetch() {
+export function CityFetch(props) {
 
   // "OBJEKTET"
-  const city = 'Malmö';
+  const city = props.obj.city;
 
   const [result, setResult] = useState();
   

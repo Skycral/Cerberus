@@ -4,14 +4,13 @@ import settings from '../../settings.json';
 
 export function EventFetch(props) {
 
-  console.log('hanna i event', props.obj);
 
   // "OBJEKTET"
   const searchObject = {
-    countryCode: 'SE',
-    city: 'Malmo',
-    startDate: '2021-10-20T00:00:00Z',
-    endDate: '2021-10-29T23:59:59Z'
+    countryCode: 'SE', //ETT PROBLEM NÄR VI VILL UTÖKA TILL VÄRLDEN, kanske går att ta bort?
+    city: props.obj.city,
+    startDate: props.obj.startDate + 'T00:00:00Z',
+    endDate: props.obj.endDate + 'T23:59:59Z'
   }
 
   const [result, setResult] = useState();

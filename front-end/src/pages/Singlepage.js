@@ -5,13 +5,21 @@ import { Link } from "react-router-dom";
 
 
 export function SinglePage(props) {
-  console.log('hej', props.searchObj);
+  //Lägga till localStorage
+  let searchObject = props.searchObj;
+
+  if (searchObject) {
+    window.localStorage.setItem('search', JSON.stringify(props.searchObj));
+  } else {
+    searchObject = JSON.parse(window.localStorage.getItem('search'));
+  }
+
   return(
     <>
     <Link to="/">Tillbaka</Link>
-    <CityFetch />
-    <ActivityFetch />
-    <EventFetch obj={props.searchObj}/>
+    <CityFetch obj={searchObject}/>
+    <ActivityFetch obj={searchObject}/>
+    <EventFetch obj={searchObject}/>
     </>
   );
 };
