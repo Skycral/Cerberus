@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 export function SinglePage(props) {
-  //Lägga till localStorage
+
   let searchObject = props.searchObj;
 
   if (searchObject) {
