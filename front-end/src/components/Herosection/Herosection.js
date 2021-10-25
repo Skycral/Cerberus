@@ -94,7 +94,7 @@ function Herosection(props) {
   //   };
 
   return (
-    <Box noValidate autoComplete="off" sx={{marginBottom: '100px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+    <Box noValidate autoComplete="off">
       <Link to='/page'>Singelsida</Link>
       <Typography variant="h5" sx={{mt: '30px'}} >Hur länge vill du ha semester?</Typography>
       <DateSelect func={updatePeriod}/>
@@ -110,7 +110,10 @@ function Herosection(props) {
       <Button 
           sx={{ width: '50%'}} 
           variant="contained"
-          onClick={() => handleClick(category, company, start, end)}>
+          onClick={(e) => {
+            console.log(e.target);
+            handleClick(category, company, start, end)
+          }}>
       Visa platser
       </Button>
       {result ? result.map((e, i) => {
