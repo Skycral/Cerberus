@@ -51,9 +51,40 @@ const getActivities = async (category) => {
   }  
 };
 
+const getResult = async (company, category, start, end) => {
+  try {
+    const dbCon = await openDb();
+    let query;
+
+    if (company === 'Familjeresa') company = 'family';
+    if (company === 'Parresa') company = 'couple';
+    if (company === 'Soloresa') company = 'solo';
+    if (company === 'Kompisresa') company = 'friends';
+  
+    query = 
+      `SELECT cities.cityName, activities.activity
+      FROM cityactivities 
+      INNER JOIN cities ON cities.cityCode = cityactivities.city 
+      INNER JOIN activities ON activities.activityId = cityactivities.actId 
+      INNER JOIN categories ON categories.categoryId = cityactivities.catId
+      WHERE categories.category = ?
+      AND activities.${company} = 1
+      AND (? BETWEEN fromDate AND toDate)
+      AND (? BETWEEN fromDate AND toDate)
+      GROUP BY cities.cityName;`
+
+    const result = await dbCon.all(query, [category, start, end]);
+    console.log(result);
+    return result;
+  } catch (error){
+    console.log(error)
+  }  
+};
+
 module.exports = {
   getCities,
   searchCity,
   getCategories,
-  getActivities
+  getActivities,
+  getResult
 };

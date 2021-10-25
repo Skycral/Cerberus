@@ -119,5 +119,38 @@ routes.get("/activities/:category", async (req, res) => {
   }
 });
 
+routes.get("/result/:company/:category/:start/:end", async (req, res) => {
+  try {
+    let startYear = req.params.start.substring(0, 4);
+    let endYear = req.params.end.substring(0, 4);
+    let startMonth = req.params.start.substring(5, 7);
+    let endMonth = req.params.end.substring(5, 7);
+    console.log(startMonth, endMonth);
+    
+    if (endYear > startYear || endMonth < startMonth) {
+      startYear = '1970';
+      endYear = '1971';
+    } else {
+      startYear = '1970';
+      endYear = '1970';
+    }
+
+
+    const newStart = startYear.concat(req.params.start.substring(4, 10));
+    const newEnd = endYear.concat(req.params.end.substring(4, 10));
+
+    const acts = await db.getResult(req.params.company, req.params.category, newStart, newEnd);
+
+    if (acts) {
+      res.send(acts);
+    } else {
+      res.status(404).send({status: "nok", msg: `No activities could be found.`});
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({status: "nok"});
+  }
+});
+
   
 module.exports = routes;

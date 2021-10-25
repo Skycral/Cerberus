@@ -63,10 +63,14 @@ function Herosection(props) {
     }
   };
 
-  const handleClick = async (category) => {
+  // City select-komponent
+  const handleClick = async (category, company, start, end) => {
     try {
-      const response = await (await fetch(`${settings.backend}/activities/${category}`)).json();
+      console.log('till db: ', category, company, start, end);
+      //const response = await (await fetch(`${settings.backend}/activities/${category}`)).json();
+      const response = await (await fetch(`${settings.backend}/result/${company}/${category}/${start}/${end}`)).json();
       setResult(response);
+      console.log(response);
     } catch (e) {
       console.log(e);
     }
@@ -106,7 +110,7 @@ function Herosection(props) {
       <Button 
           sx={{ width: '50%'}} 
           variant="contained"
-          onClick={() => handleClick(category)}>
+          onClick={() => handleClick(category, company, start, end)}>
       Visa platser
       </Button>
       {result ? result.map((e, i) => {
