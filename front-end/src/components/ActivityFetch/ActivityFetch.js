@@ -12,20 +12,22 @@ export function ActivityFetch(props) {
   const [image, setImage] = useState();
   
   const fetcher = () => {
-    fetch(`${settings.backend}/places/${activity}/${city}`, {
-      headers: {'accept' : 'application/json'}
-    })
+    try {
+      fetch(`${settings.backend}/places/${activity}/${city}`, {
+        headers: {'accept' : 'application/json'}
+      })
       .then((res) => res.json())
       .then((data) => {
         setResult(data.resultat);
         setImage(data.foto);
         })
       .catch(e => console.log(e));
+    } catch (error) {
+      console.log(error);
+    }
+    
   };
-
-    console.log(result)
-    console.log(image)
-
+ 
   useEffect(() => {fetcher()}, []);
 
   return (

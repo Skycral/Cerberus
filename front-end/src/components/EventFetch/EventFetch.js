@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import settings from '../../settings.json';
 
-
 export function EventFetch(props) {
-
 
   // "OBJEKTET"
   const searchObject = {
@@ -16,20 +14,21 @@ export function EventFetch(props) {
   const [result, setResult] = useState();
   
   const fetcher = () => {
-    fetch(`${settings.backend}/events/${searchObject.startDate}/${searchObject.endDate}/${searchObject.city}/${searchObject.countryCode}/0`, {
-      headers: {'accept' : 'application/json'}
-    })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setResult(data._embedded.events);
-          })
-        .catch(e => console.log(e));
+    try {
+      fetch(`${settings.backend}/events/${searchObject.startDate}/${searchObject.endDate}/${searchObject.city}/${searchObject.countryCode}/0`, {
+        headers: {'accept' : 'application/json'}
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setResult(data._embedded.events);
+        })
+      .catch(e => console.log(e));
+    } catch (error) {
+      console.log(error);
+    }
+    
   };
-
-
-    console.log(result)
-
     
   useEffect(() => {fetcher()}, []);
 
@@ -40,7 +39,6 @@ export function EventFetch(props) {
     return <p key={`event-${i}`}><a href={e.url} target="_blank" rel="noreferrer">{e.dates.start.localDate}, kl. {e.dates.start.localTime.substring(0,5)} - {e.name}</a></p>
   }) : ''}
     </>
-
   );
 }
 

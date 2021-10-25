@@ -76,41 +76,45 @@ export function DateSelect(props) {
     }
 
     const getDateRange = async () => {
-        const responseFirst = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${startYear}`);
-        const parsingFirst = await responseFirst.json();
-        let twoYears = false;
-        let filterSecond = [];
-        if (startYear !== endYear) { twoYears = true; }; // Kollar om start- och slutåren är olika
+        try {
+            const responseFirst = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${startYear}`);
+            const parsingFirst = await responseFirst.json();
+            let twoYears = false;
+            let filterSecond = [];
+            if (startYear !== endYear) { twoYears = true; }; // Kollar om start- och slutåren är olika
 
-        const filterFirst = parsingFirst.dagar.filter((e) => {
-            if (e.datum >= startDate && e.datum <= endDate) {
-                return e;
-            } else {
-                return '';
-            }
-        });
-
-        //console.log('filterfirst', filterFirst);
-
-        if (twoYears) {
-            const responseSecond = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${endYear}`);
-            const parsingSecond = await responseSecond.json();
-
-            filterSecond = parsingSecond.dagar.filter((e) => {
+            const filterFirst = parsingFirst.dagar.filter((e) => {
                 if (e.datum >= startDate && e.datum <= endDate) {
                     return e;
                 } else {
                     return '';
                 }
             });
-            //console.log('filtersecond', filterSecond);
-        }
 
-        if (twoYears) {
-            setDateRange(filterFirst.concat(filterSecond));
-        } else {
-            setDateRange(filterFirst);
-        }
+            //console.log('filterfirst', filterFirst);
+
+            if (twoYears) {
+                const responseSecond = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${endYear}`);
+                const parsingSecond = await responseSecond.json();
+
+                filterSecond = parsingSecond.dagar.filter((e) => {
+                    if (e.datum >= startDate && e.datum <= endDate) {
+                        return e;
+                    } else {
+                        return '';
+                    }
+                });
+                //console.log('filtersecond', filterSecond);
+            }
+
+            if (twoYears) {
+                setDateRange(filterFirst.concat(filterSecond));
+            } else {
+                setDateRange(filterFirst);
+            }
+        } catch (error) {
+            console.log(error);
+        } 
     }
     
     const handleClick = (days, date) => {
