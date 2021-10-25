@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:  #98d2e4;
 }
 
 code {
@@ -12,7 +13,52 @@ code {
     monospace;
 }
 
+/*----------------------------------- HERO SECTION -----------------------------------*/
+
+.MuiBox-root {
+  margin-bottom: 100px; 
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+}
+
+/*----------------------------------- DATE SELECT -----------------------------------*/
+
+.dateBtn {
+  padding: 0.8rem;
+  margin: 0.5rem;
+  background-color: #BDD537;
+  color: white;
+  font-weight: bold;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 15px;
+}
+
+.dateBtn:hover {
+  background-color: #97aa2c; /* 20% svart overlay */
+
+}
+
+.dateBtn:active {
+  background-color: #97aa2c; /* 20% svart overlay */
+
+}
+
+/*----------------------------------- SINGLE PAGE -----------------------------------*/
+
+div.singlePageContainer {
+  width: 70%;
+  margin: 0 auto;
+}
+
+/*----------------------------------- CITY PRESENTATION -----------------------------------*/
+
 .cityfetch {
+  min-width: 90%;
   max-width: 800px;
   margin: 0 auto;
   display: flex;
@@ -20,14 +66,21 @@ code {
   padding: 2rem;  
 }
 
-.cityfetch img {
+.cityFetchImg {
+  height: 200px;
   width: 200px;
   border-radius: 50%;
   margin-right: 2rem;
   align-self: center;
+  overflow: hidden;
+}
+
+.cityfetch img {
+  object-fit: cover; 
 }
 
 
 .cityfetchText {
   align-self: center;
+  width: 500px;
 }

@@ -56,7 +56,9 @@ export function CityFetch(props) {
   return (
     <Card sx={{ maxWidth: 800, margin: 'auto', mb: '5rem', mt: '3rem' }}>
       <div className='cityfetch'>
+        <div className='cityFetchImg'>
           {result ? <img src={result.originalimage.source} alt={result.description}></img> : ''}
+        </div>
         <div className='cityfetchText'>
           <h1>{city}</h1>
           <p>{result ? result.extract : ''}</p>

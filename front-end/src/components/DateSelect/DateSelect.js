@@ -143,9 +143,6 @@ export function DateSelect(props) {
         setResult(topPickArray)
     }
 
-
-    //console.log('result', result)
-
     return(
         <div>
             <TextField type="number" label={'Antal dagar'} onChange={(e) => {setDays(e.target.value)}}/>
@@ -154,7 +151,7 @@ export function DateSelect(props) {
             {result ? result.map((e, i) => { 
                 const start = `${e[0].datum}`
                 const end = `${e[e.length-1].datum}`;
-                return <button key={`period-${i}`} onClick={() => props.func(start, end)}>{`${start} - ${end}`}</button>
+                return <button key={`period-${i}`} className='dateBtn' onClick={() => props.func(start, end)}>{`${start} - ${end}`}</button>
             }) 
             : ''}
 
