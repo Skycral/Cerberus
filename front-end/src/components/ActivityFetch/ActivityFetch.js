@@ -5,7 +5,7 @@ import settings from '../../settings.json';
 export function ActivityFetch(props) {
 
   // "OBJEKTET"
-  const activity = 'nöjespark'
+  const activity = props.obj.activity;
   const city = props.obj.city;
 
   const [result, setResult] = useState();

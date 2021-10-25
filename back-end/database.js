@@ -54,6 +54,8 @@ const getActivities = async (category) => {
 const getResult = async (company, category, start, end) => {
   try {
     const dbCon = await openDb();
+    const secondStartYear = start.replace('1970', '1971');
+    const secondEndYear = end.replace('1970', '1971');
     let query;
 
     if (company === 'Familjeresa') company = 'family';
@@ -61,6 +63,25 @@ const getResult = async (company, category, start, end) => {
     if (company === 'Soloresa') company = 'solo';
     if (company === 'Kompisresa') company = 'friends';
   
+    if(start.substring(0, 4) === end.substring(0, 4)) {
+     query = 
+     `SELECT cities.cityName, activities.activity
+      FROM cityactivities 
+      INNER JOIN cities ON cities.cityCode = cityactivities.city 
+      INNER JOIN activities ON activities.activityId = cityactivities.actId 
+      INNER JOIN categories ON categories.categoryId = cityactivities.catId
+      WHERE categories.category = ?
+      AND activities.${company} = 1
+      AND ((? >= fromDate
+      AND ? <= toDate)
+      OR(? >= fromDate
+      AND ? <= toDate))
+      GROUP BY cities.cityName;`
+      const result = await dbCon.all(query, [category, start, end, secondStartYear, secondEndYear]);
+      console.log(result);
+      return result;
+
+    } else {
     query = 
       `SELECT cities.cityName, activities.activity
       FROM cityactivities 
@@ -69,13 +90,14 @@ const getResult = async (company, category, start, end) => {
       INNER JOIN categories ON categories.categoryId = cityactivities.catId
       WHERE categories.category = ?
       AND activities.${company} = 1
-      AND (? BETWEEN fromDate AND toDate)
-      AND (? BETWEEN fromDate AND toDate)
+      AND ? >= fromDate
+      AND ? <= toDate
       GROUP BY cities.cityName;`
+      const result = await dbCon.all(query, [category, start, end]);
+      console.log(result);
+      return result;
 
-    const result = await dbCon.all(query, [category, start, end]);
-    console.log(result);
-    return result;
+    }
   } catch (error){
     console.log(error)
   }  
