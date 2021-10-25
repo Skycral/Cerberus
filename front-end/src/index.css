@@ -5,12 +5,27 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:  #98d2e4;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/*----------------------------------- HERO SECION -----------------------------------*/
+
+.MuiBox-root {
+  margin-bottom: 100px; 
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+
+/*----------------------------------- CITY PRESENTATION -----------------------------------*/
 
 .cityfetch {
   max-width: 800px;

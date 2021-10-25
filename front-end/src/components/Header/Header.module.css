@@ -1,13 +1,32 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .Header {
-  background-color: #ff6b81;
+  background-color: #98d2e4;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: baseline;
+  justify-content: space-between;
   color: white;
+  height: 18vh;
+  padding: 2rem;
 }
 
 .HeaderTitle {
   font-weight: 700;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 3vmin);
   color: white;
+  margin-bottom: 0;
+}
+
+.MainNav a {
+  color: white;
+  text-decoration: none;
+}
+
+
+.MainNav a:hover {
+  text-decoration: underline;
 }
