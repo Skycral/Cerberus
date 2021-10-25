@@ -28,7 +28,7 @@ code {
 /*----------------------------------- DATE SELECT -----------------------------------*/
 
 .dateBtn {
-  padding: 0.8rem;
+  padding: 0.9rem;
   margin: 0.5rem;
   background-color: #BDD537;
   color: white;
@@ -43,9 +43,12 @@ code {
 
 }
 
-.dateBtn:active {
+.dateBtn.active {
   background-color: #97aa2c; /* 20% svart overlay */
+}
 
+.dateBtn.dateBtn.active::before {
+  content: "✔ ";
 }
 
 /*----------------------------------- SINGLE PAGE -----------------------------------*/
