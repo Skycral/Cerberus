@@ -110,7 +110,10 @@ function Herosection(props) {
       <Button 
           sx={{ width: '50%'}} 
           variant="contained"
-          onClick={() => handleClick(category, company, start, end)}>
+          onClick={(e) => {
+            console.log(e.target);
+            handleClick(category, company, start, end)
+          }}>
       Visa platser
       </Button>
       {result ? result.map((e, i) => {

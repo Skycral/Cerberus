@@ -17,11 +17,11 @@ export function SinglePage(props) {
   console.log(searchObject)
 
   return(
-    <>
-    <Link to="/">Tillbaka</Link>
-    <CityFetch obj={searchObject}/>
-    <ActivityFetch obj={searchObject}/>
-    <EventFetch obj={searchObject}/>
-    </>
+    <div className='singlePageContainer'>
+      <Link to="/">Tillbaka</Link>
+      <CityFetch obj={searchObject}/>
+      <ActivityFetch obj={searchObject}/>
+      <EventFetch obj={searchObject}/>
+    </div>
   );
 };
