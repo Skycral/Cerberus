@@ -147,7 +147,18 @@ export function DateSelect(props) {
             {result ? result.map((e, i) => { 
                 const start = `${e[0].datum}`
                 const end = `${e[e.length-1].datum}`;
-                return <button key={`period-${i}`} className='dateBtn' onClick={() => props.func(start, end)}>{`${start} - ${end}`}</button>
+                return <button 
+                    key={`period-${i}`} 
+                    className='dateBtn' 
+                    onClick={(e) => {
+                        props.func(start, end);
+                        const dateBtns = document.querySelectorAll('.dateBtn');
+                        dateBtns.forEach((e) => e.classList.remove('active'));
+                        e.target.classList.toggle('active');
+                    }}
+                >
+                    {`${start} - ${end}`}
+                </button>
             }) 
             : ''}
 
