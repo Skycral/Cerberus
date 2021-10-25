@@ -14,6 +14,8 @@ export function SinglePage(props) {
     searchObject = JSON.parse(window.localStorage.getItem('search'));
   }
 
+  console.log(searchObject)
+
   return(
     <>
     <Link to="/">Tillbaka</Link>

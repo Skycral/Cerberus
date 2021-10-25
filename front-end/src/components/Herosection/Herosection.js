@@ -9,6 +9,7 @@ import settings from '../../settings.json'
 function Herosection(props) {
     const [categories, setCategories] = useState("");
     const [category, setCategory] = useState();
+    const [activity, setActivity] = useState();
     const [company, setCompany] = useState();
     const [result, setResult] = useState([]);
     const [city, setCity] = useState();
@@ -19,6 +20,7 @@ function Herosection(props) {
       endDate: '',
       category: '',
       company: '',
+      activity: '',
       city: ''
     });
 
@@ -36,14 +38,13 @@ function Herosection(props) {
     setSearchObject({...searchObject, category: category});
   }, [category]);
 
-  
   useEffect(() => {
     setSearchObject({...searchObject, company: company});
   }, [company]);
 
   useEffect(() => {
-    setSearchObject({...searchObject, city: city});
-  }, [city]);
+    setSearchObject({...searchObject, city: city, activity: activity});
+  }, [city, activity]);
 
   useEffect(() => {
     console.log(searchObject);
@@ -82,11 +83,10 @@ function Herosection(props) {
     setEnd(end);
   };
 
-  const handleResultClick = (cityName) => {
+  const handleResultClick = (cityName, activity) => {
     setCity(cityName);
+    setActivity(activity);
   };
-
-
   // const fetchWeather = async () => {
   //     const response = await (
   //       await fetch(`http://localhost:3000/weather`)
@@ -115,7 +115,7 @@ function Herosection(props) {
       </Button>
       {result ? result.map((e, i) => {
           return (
-            <Link key={`res-${i}`} to='/page' onMouseEnter={() => handleResultClick(e.cityName)}>
+            <Link key={`res-${i}`} to='/page' onMouseEnter={() => handleResultClick(e.cityName, e.activity)}>
               <Typography variant="h5">{e.cityName}</Typography>
             </Link>
             );
