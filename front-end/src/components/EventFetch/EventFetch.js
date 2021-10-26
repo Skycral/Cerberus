@@ -40,7 +40,7 @@ export function EventFetch(props) {
       <div className="eventfetch">
         <h2>Event i {searchObject.city} mellan {searchObject.startDate.substring(0, 10)} och {searchObject.endDate.substring(0, 10)}</h2>
         {result ? result.map((e, i) => { 
-        return <p key={`event-${i}`}><a href={e.url} target="_blank" rel="noreferrer">{e.dates.start.localDate}, kl. {e.dates.start.localTime.substring(0,5)} - {e.name}</a></p>
+        return <p key={`event-${i}`}><a href={e.url} target="_blank" rel="noreferrer">{e.dates.start.localDate ? e.dates.start.localDate : ''}, kl. {e.dates.start.localTime ? e.dates.start.localTime.substring(0,5) : ''} - {e.name}</a></p>
         }) : ''}
       </div>
     </Card>
