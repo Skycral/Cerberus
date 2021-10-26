@@ -13,31 +13,26 @@ export function WeatherSelect() {
   const [result, setResult] = useState();
   
   const fetcher = () => {
-    fetch(`${settings.backend}/weather/${startDateWeather}/${endDateWeather}/${cityWeather}`, {
+    try {
+      fetch(`${settings.backend}/weather/${startDateWeather}/${endDateWeather}/${cityWeather}`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json'
         }
-      })
+        })
         .then(res => res.json())
         .then(data => {
-          console.log(data.locations[0].values);
-      
           const result = data.locations[0].values;
-      
           result.forEach(e => {
             console.log(`Genomsnittstemperatur den ${e.datetimeStr.substring(0,10)}: ${e.temp} grader Celcius`)
-          })
-      
-      
+          })      
         })
         .catch((e) => console.log(e));
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-
-    console.log(result)
-
-    
+  
   useEffect(() => {fetcher()}, []);
 
   return(

@@ -13,14 +13,19 @@ export function CityFetch(props) {
   const [result, setResult] = useState();
   
   const fetcher = () => {
-    fetch(`${settings.backend}/city/${city}`, {
-      headers: {'accept' : 'application/json'}
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setResult(data);
-        })
-      .catch(e => console.log(e));
+    try {
+      fetch(`${settings.backend}/city/${city}`, {
+        headers: {'accept' : 'application/json'}
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setResult(data);
+          })
+        .catch(e => console.log(e));
+    } catch (error) {
+      console.log(error);
+    }
+    
   };
 
     console.log(result)

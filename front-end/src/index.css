@@ -13,6 +13,11 @@ code {
     monospace;
 }
 
+/*----------------------------------- HEADER-----------------------------------*/
+/* .headerContainer {
+  background-color: #005385;
+} */
+
 /*----------------------------------- HERO SECTION -----------------------------------*/
 
 .MuiBox-root {
@@ -86,4 +91,61 @@ div.singlePageContainer {
 .cityfetchText {
   align-self: center;
   width: 500px;
+}
+
+.cityfetchText h1 {
+  margin-bottom: 0.5rem;
+}
+
+/*----------------------------------- ACTIVITY PRESENTATION -----------------------------------*/
+
+.activityfetch {
+  min-width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  padding: 2rem;  
+}
+
+.activityFetchImg {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  margin-right: 2rem;
+  align-self: center;
+  overflow: hidden;
+}
+
+.activityfetch img {
+  object-fit: cover; 
+}
+
+
+.activityfetchText {
+  align-self: center;
+  width: 500px;
+}
+
+.activityfetchText h3 {
+  margin-bottom: 0.5rem;
+}
+
+/*----------------------------------- EVENT PRESENTATION -----------------------------------*/
+
+.eventfetch {
+  min-width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;  
+}
+
+.eventfetch h2 {
+  margin-bottom: 1rem;
+}
+
+.eventfetch p {
+  margin-bottom: 0.5rem;
 }
