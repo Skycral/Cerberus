@@ -58,6 +58,17 @@ code {
   display: flex;
 }
 
+/*--- RESULTCARD ---*/
+.resultCard {
+  padding: 0.7rem;
+  
+}
+
+.resultCardText p:link, .resultCardText p:visited {
+  text-decoration: none;
+}
+
+
 /*----------------------------------- DATE SELECT -----------------------------------*/
 
 .dateBtn {
