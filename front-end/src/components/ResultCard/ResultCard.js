@@ -31,10 +31,10 @@ export function ResultCard(props) {
   useEffect(() => {fetcher()}, []);
 
   return (
-    <Card sx={{ maxWidth: 400, margin: 'auto', mb: '1rem', mt: '2rem' }}>
+    <Card sx={{ maxWidth: '75%', margin: 'auto', mb: '1rem', mt: '2rem' }}>
       <div className='resultCard'>
         <div className='cityFetchImg'>
-          {result ? <img src={result.originalimage.source} alt={result.description}></img> : ''}
+          {result ? <img className='resultCardImg' src={result.originalimage.source} alt={result.description}></img> : ''}
         </div>
         <div className='resultCardText'>
           <h4>{result ? result.title : ''}</h4>

@@ -3,15 +3,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: black;
   bottom: 0;
   left: 0;
   height: 100px;
-  background-color: black;
+  width: 100%;
+  margin-top: 100vh;
+  background-color: rgb(141, 187, 144);
 }
 
 .FooterTitle {
   font-weight: 700;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
