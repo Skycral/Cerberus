@@ -1,5 +1,6 @@
-import { Typography, Box, Button, Card, } from "@mui/material";
+import { Typography, Button, Stack, Chip } from "@mui/material";
 import { CategorySelect } from '../CategorySelect/CategorySelect'
+import { Header } from "../Header/Header";
 import { TravelSelect } from '../TravelSelect/TravelSelect'
 import { ResultCard } from '../ResultCard/ResultCard'
 import { DateSelect } from '../DateSelect/DateSelect'
@@ -94,47 +95,97 @@ function Herosection(props) {
   //     ).then(response => response.json()).then(response => setObj({...obj, weather: response.date}))
   //   };
 
+  const handleDelete = (input) => {
+    if(input === 'date') {
+      setStart();
+      setEnd();
+    } else if (input === 'category') {
+      setCategory();
+    } else {
+      setCompany();
+    }
+  };
+
   return (
-    <Box noValidate autoComplete="off" className='heroContainer'>
-      <Typography variant="h5" sx={{mt: '2rem', mb: '1.5rem',  fontWeight: 'bold'}} >Hur länge vill du ha semester?</Typography>
-      <DateSelect func={updatePeriod}/>
+    <div className='heroContainer'>
+      <img className='background' src='images/background.jpeg' alt=''/>
+        <div className='box'>
+        <div className='heroBox'>
+        <Header />
+          <div className='filters'>
+            <DateSelect func={updatePeriod}/>
+            {categories ? (
+              <CategorySelect 
+                className='categoryHero'
+                onChange={(e) => setCategory(e.target.value)} 
+                categories={categories} 
+                value={category ? category : ''}
+              />
+                ) : (
+                <p>Laddar filter...</p>
+             )}
+              <TravelSelect 
+                onChange={(e) => setCompany(e.target.value)} 
+                value={company ? company : ''}/>
+            </div>
+          <Button
+            sx={{height: '50%', justifySelf: 'center', alignSelf: 'center'}}
+            variant="contained"
+            onClick={() => {
+              handleClick(category, company, start, end)
+            }}>
+            Visa platser
+            </Button>
 
-      <div className='filters'>
-        {categories ? (
-        <CategorySelect  
-          onChange={(e) => setCategory(e.target.value)} 
-          categories={categories} 
-          value={category ? category : ''}
-        />
-          ) : (
-        <p>Laddar filter...</p>
-        )}
-
-        <TravelSelect 
-          onChange={(e) => setCompany(e.target.value)} 
-          value={company ? company : ''}/>
+        </div>
+        <div className='heroResults'>
+        {start && end ? 
+                <Stack direction="row" spacing={1} sx={{marginBottom: '2rem', marginRight: '1rem'}}>
+                <Chip
+                sx={{color: 'white'}}
+                label={`${start}-${end}`}
+                variant="outlined"
+                onClick={''}
+                onDelete={() => handleDelete('date')}
+                />
+                </Stack>
+              : ''}
+              {category ? 
+              <Stack direction="row" spacing={1} sx={{marginBottom: '2rem', marginRight: '1rem'}}>
+                <Chip
+                sx={{color: 'white'}}
+                label={category}
+                variant="outlined"
+                onClick={''}
+                onDelete={() => handleDelete('category')}
+                />
+                </Stack>
+              : ''}
+              {company ?
+              <Stack direction="row" spacing={1} sx={{marginBottom: '2rem', marginRight: '1rem'}}>
+                <Chip
+                sx={{color: 'white'}}
+                label={company}
+                variant="outlined"
+                onClick={''}
+                onDelete={() => handleDelete('company')}
+                />
+                </Stack>
+              : ''}
+              </div>
+              
+        </div>
+        {result && start && end && category && company ? result.map((e, i) => {
+            return (
+              <Link key={`res-${i}`} to='/page' onMouseEnter={() => handleResultClick(e.cityName, e.activity)}>
+                <ResultCard obj={e.cityName}>
+                  <Typography variant="h5">{e.cityName}</Typography>
+                </ResultCard>
+              </Link>
+              );
+        }) : ''}
       </div>
-
-      <Button 
-          sx={{ width: '50%', mb: '2rem'}} 
-          variant="contained"
-          onClick={() => {
-            handleClick(category, company, start, end)
-          }}>
-      Visa platser
-      </Button>
-      {result && start && end && category && company ? result.map((e, i) => {
-          return (
-            <Link key={`res-${i}`} to='/page' onMouseEnter={() => handleResultClick(e.cityName, e.activity)}>
-              <ResultCard obj={e.cityName}>
-                <Typography variant="h5">{e.cityName}</Typography>
-              </ResultCard>
-            </Link>
-            );
-      }) : ''}
-      
-    </Box>
-  );
+    );
 }
 
   export default Herosection;

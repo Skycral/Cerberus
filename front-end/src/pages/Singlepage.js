@@ -18,6 +18,7 @@ export function SinglePage(props) {
 
   return(
     <div className='singlePageContainer'>
+      <img className='background' src='images/background.jpeg' alt=''/>
       <Link to="/">Tillbaka</Link>
       <CityFetch obj={searchObject}/>
       <ActivityFetch obj={searchObject}/>

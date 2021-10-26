@@ -23,7 +23,7 @@ export const TravelSelect = ({
     ));
   
     return (
-      <FormControl fullWidth>
+      <FormControl sx={{backgroundColor: 'white'}} fullWidth>
         <InputLabel id="simple-select-label">Resesällskap</InputLabel>
         <Select
           labelId="simple-select-label"
