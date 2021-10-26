@@ -23,7 +23,7 @@ export const CategorySelect = ({
     ));
   
     return (
-      <FormControl fullWidth>
+      <FormControl sx={{marginRight: '2rem', backgroundColor: 'white'}} fullWidth>
         <InputLabel id="simple-select-label">Resekategori</InputLabel>
         <Select
           labelId="simple-select-label"

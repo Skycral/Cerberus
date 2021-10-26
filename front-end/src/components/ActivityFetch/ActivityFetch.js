@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import settings from '../../settings.json';
 import * as React from 'react';
-import {Card, CardActions, CardContent, CardMedia, Button, Typography, Box}from '@mui/material';
+import {Card, CardActions, CardContent, CardMedia, Button, Typography, Box, CircularProgress}from '@mui/material';
 
 
 export function ActivityFetch(props) {
@@ -43,15 +43,15 @@ export function ActivityFetch(props) {
       }}
     >
       <Typography variant="h3" align="center" component="h2" gutterBottom  sx={{width: "100%"}}>
-        {activity} i {city}
+        {activity === 'Fine dining' ? 'Mat & dryck' : activity} i {city}
       </Typography>
 
     {result ? result.details.map((e, i) => {
       return (
-        <Card key={`activity-${i}`} sx={{ maxWidth: 345, margin: '2rem' }}>
+        <Card key={`activity-${i}`} sx={{ width: 345, height: 345, margin: '2rem' }}>
         <CardMedia
           component="img"
-          height="140"
+          height="150"
           image={result.photos[i] ? result.photos[i] : result.photos[i - 1]}
           alt={e.result.name}
         />
@@ -69,7 +69,7 @@ export function ActivityFetch(props) {
         </CardActions>
       </Card>
       );
-    }): <p>Laddar aktiviteter..</p>}
+    }): <CircularProgress />}
   </Box>
   );
 }

@@ -39,6 +39,8 @@ export function DateSelect(props) {
     const [freeDays, setFreeDays] = useState();
     const [userMessage, setUserMessage] = useState();
 
+    const [active, setActive] = useState();
+
     // USE EFFECTS ------------------------------------------------------
 
     useEffect(() => {
@@ -56,8 +58,6 @@ export function DateSelect(props) {
                 ${days-freeDays > 0 ? days-freeDays : 'inte ta ut någon'} 
                 ${days-freeDays <= 1 ? 'semesterdag' : 'semesterdagar' }.`
             )
-        } else {
-            setUserMessage('Ange tre dagar eller fler')
         };
     }, [days, freeDays])
 
@@ -140,15 +140,16 @@ export function DateSelect(props) {
 
     return(
         <div>
+            <div className='dateDropdown'>
             <TextField 
                 type="number" 
                 variant="filled" 
                 label={'Antal dagar'} 
-                onChange={(e) => {setDays(e.target.value)}}
+                onChange={(e) => {setActive(true); setDays(e.target.value)}}
                 sx={{backgroundColor: 'white'}}
             />
-
-            { days ?
+            { active, days ? 
+            <div className='dateDropdownContent'>
             <Button
                 variant="text" 
                 aria-label="Se fler resultat" 
@@ -160,7 +161,6 @@ export function DateSelect(props) {
             >
                 Smalna av sökningen ▼
             </Button>
-            : '' }
 
             {result ? 
                 <div className='narrowSearch'>
@@ -188,8 +188,10 @@ export function DateSelect(props) {
                         key={`period-${i}`} 
                         className='dateBtn' 
                         onClick={(e) => {
+                            setActive(false);
                             props.func(start, end);
                             const dateBtns = document.querySelectorAll('.dateBtn');
+                            document.querySelector('.dateDropdownContent').classList.toggle('hidden');
                             dateBtns.forEach((e) => e.classList.remove('active'));
                             e.target.classList.toggle('active');
                         }}
@@ -197,9 +199,12 @@ export function DateSelect(props) {
                         {`${start} - ${end}`}
                     </button>
                 )
-            }) 
-            : '' }
-            </div>
+            }) : '' }
         </div>
-    );
+        
+    </div> : ''}
+    
+</div>
+</div>
+);
 }
