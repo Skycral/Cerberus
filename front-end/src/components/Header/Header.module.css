@@ -9,9 +9,10 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  color: white;
+  color: black;
   height: 18vh;
   padding: 2rem;
+  background-color: white;
 }
 
 .HeaderTitle {
