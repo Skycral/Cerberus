@@ -94,27 +94,35 @@ function Herosection(props) {
   //   };
 
   return (
-    <Box noValidate autoComplete="off">
-      <Typography variant="h5" sx={{mt: '30px'}} >Hur länge vill du ha semester?</Typography>
+    <Box noValidate autoComplete="off" className='heroContainer'>
+      <Typography variant="h5" sx={{mt: '2rem', mb: '1.5rem',  fontWeight: 'bold'}} >Hur länge vill du ha semester?</Typography>
       <DateSelect func={updatePeriod}/>
 
-      {categories ? (
-      <CategorySelect sx={{width: '50%'}} onChange={(e) => setCategory(e.target.value)} categories={categories} value={category ? category : ''}/>
-        ) : (
-      <p>Laddar filter...</p>
-      )}
+      <div className='filters'>
+        {categories ? (
+        <CategorySelect  
+          onChange={(e) => setCategory(e.target.value)} 
+          categories={categories} 
+          value={category ? category : ''}
+        />
+          ) : (
+        <p>Laddar filter...</p>
+        )}
 
-        <TravelSelect sx={{width: '50%'}} onChange={(e) => setCompany(e.target.value)} value={company ? company : ''}/>
+        <TravelSelect 
+          onChange={(e) => setCompany(e.target.value)} 
+          value={company ? company : ''}/>
+      </div>
 
       <Button 
-          sx={{ width: '50%'}} 
+          sx={{ width: '50%', mb: '2rem'}} 
           variant="contained"
           onClick={() => {
             handleClick(category, company, start, end)
           }}>
       Visa platser
       </Button>
-      {result ? result.map((e, i) => {
+      {result && start && end && category && company ? result.map((e, i) => {
           return (
             <Link key={`res-${i}`} to='/page' onMouseEnter={() => handleResultClick(e.cityName, e.activity)}>
               <Typography variant="h5">{e.cityName}</Typography>

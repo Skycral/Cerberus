@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { TextField, Typography, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 export function DateSelect(props) {
@@ -30,7 +30,7 @@ export function DateSelect(props) {
     const [startDate, setStartDate] = useState(todayStr);
     const [endDate, setEndDate] = useState(nextYearStr);
     const [startYear, setStartYear] = useState(yearToday);
-    const [endYear, setEndYear] = useState(yearNextYear); // +1
+    const [endYear, setEndYear] = useState(yearNextYear);
 
     const [dateRange, setDateRange] = useState();
     const [days, setDays] = useState();
@@ -51,28 +51,26 @@ export function DateSelect(props) {
     useEffect(() => {
         if (days && dateRange && days > 2) {
             handleClick(days, dateRange)
-            setUserMessage(`Följande perioder ger mest "bang for the buck", du behöver ta ut ${days-freeDays > 0 ? days-freeDays : 0} semesterdagar:`)
+            setUserMessage(
+                `Resultatet nedan ger mest "bang for the buck", du behöver ta ut 
+                ${days-freeDays > 0 ? days-freeDays : 'inte ta ut någon'} 
+                ${days-freeDays <= 1 ? 'semesterdag' : 'semesterdagar' }.`
+            )
         } else {
-            console.log('Input not set');
-            setUserMessage('Ange tre dagar eller fler.')
+            setUserMessage('Ange tre dagar eller fler')
         };
     }, [days, freeDays])
-
-    // Nedan useEffect fyller ingen funktion, förutom att logga vilken range som sökresultaten baseras på
-    //useEffect(() => {console.log('full range', dateRange)}, [dateRange]);
 
     //FUNKTIONER ------------------------------------------------------
 
     const startHandler = (value) => {
         setStartDate(value);
         setStartYear(value.substring(0, 4));
-        //console.log('start', value);
     }
 
     const endHandler = (value) => {
         setEndDate(value);
         setEndYear(value.substring(0, 4));
-        //console.log('slut', endDate, value);
     }
 
     const getDateRange = async () => {
@@ -91,8 +89,6 @@ export function DateSelect(props) {
                 }
             });
 
-            //console.log('filterfirst', filterFirst);
-
             if (twoYears) {
                 const responseSecond = await fetch(`https://sholiday.faboul.se/dagar/v2.1/${endYear}`);
                 const parsingSecond = await responseSecond.json();
@@ -104,7 +100,6 @@ export function DateSelect(props) {
                         return '';
                     }
                 });
-                //console.log('filtersecond', filterSecond);
             }
 
             if (twoYears) {
@@ -145,34 +140,66 @@ export function DateSelect(props) {
 
     return(
         <div>
-            <TextField type="number" label={'Antal dagar'} onChange={(e) => {setDays(e.target.value)}}/>
+            <TextField 
+                type="number" 
+                variant="filled" 
+                label={'Antal dagar'} 
+                onChange={(e) => {setDays(e.target.value)}}
+                sx={{backgroundColor: 'white'}}
+            />
 
-            <p>{userMessage}</p>
+            { days ?
+            <Button
+                variant="text" 
+                aria-label="Se fler resultat" 
+                size="medium"
+                sx={{display: 'block', mx: 'auto'}}
+                onClick={() => {
+                    document.querySelector('.narrowSearchForm').classList.toggle('active');
+                }}
+            >
+                Smalna av sökningen ▼
+            </Button>
+            : '' }
+
+            {result ? 
+                <div className='narrowSearch'>
+                    <form className='narrowSearchForm'>
+                    <legend>Inom vilken period vill du vara ledig?</legend>
+                        <input className='Date' type="date" id="startDate" onChange={(e) => startHandler(e.target.value)}/>
+                        <input className='Date' type="date" id="endDate" onChange={(e) => endHandler(e.target.value)}/>
+                    </form>
+                </div>
+            : ''}
+
+            <Typography
+                variant="body1"
+                sx={{mb: 2, mt: 2}}>
+                {userMessage}
+            </Typography>
+
+            
+            <div className='dateBtnsDiv'>
             {result ? result.map((e, i) => { 
                 const start = `${e[0].datum}`
                 const end = `${e[e.length-1].datum}`;
-                return <button 
-                    key={`period-${i}`} 
-                    className='dateBtn' 
-                    onClick={(e) => {
-                        props.func(start, end);
-                        const dateBtns = document.querySelectorAll('.dateBtn');
-                        dateBtns.forEach((e) => e.classList.remove('active'));
-                        e.target.classList.toggle('active');
-                    }}
-                >
-                    {`${start} - ${end}`}
-                </button>
+                return (
+                    <button 
+                        key={`period-${i}`} 
+                        className='dateBtn' 
+                        onClick={(e) => {
+                            props.func(start, end);
+                            const dateBtns = document.querySelectorAll('.dateBtn');
+                            dateBtns.forEach((e) => e.classList.remove('active'));
+                            e.target.classList.toggle('active');
+                        }}
+                    >
+                        {`${start} - ${end}`}
+                    </button>
+                )
             }) 
-            : ''}
-
-            {result ? <p>Passar det inte riktigt? Ange en tidsperiod nedan för att smalna av sökningen:</p> : ''}
-
-            <form>
-            <legend>Mellan vilken period vill du vara ledig?</legend>
-                <input className='Date' type="date" id="startDate" defaultValue={startDate} onChange={(e) => startHandler(e.target.value)}/>
-                <input className='Date' type="date" id="endDate" defaultValue={endDate} onChange={(e) => endHandler(e.target.value)}/>
-            </form>
+            : '' }
+            </div>
         </div>
     );
 }
