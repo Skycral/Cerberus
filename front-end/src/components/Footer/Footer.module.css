@@ -1,11 +1,12 @@
 .Footer {
-  background-color: #98d2e4;
+  /* background-color: #98d2e4; */
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   bottom: 0;
   left: 0;
+  height: 100px;
 }
 
 .FooterTitle {

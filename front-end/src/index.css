@@ -1,3 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100vh;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+  background: rgb(190,228,230);
+  background: linear-gradient(180deg, rgba(190,228,230,1) 0%, rgba(105,173,232,1) 100%);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,7 +22,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color:  #98d2e4;
+  /*background-color:  #98d2e4;*/
+  
 }
 
 code {
@@ -29,32 +47,54 @@ code {
   text-align: center;
   
 }
+.heroContainer {
+  width: 70%;
+  margin: 0 auto 5rem auto;
+}
+
+.filters {
+  width: 50%;
+  margin: 2rem auto 2rem auto;
+  display: flex;
+}
 
 /*----------------------------------- DATE SELECT -----------------------------------*/
 
 .dateBtn {
-  padding: 0.9rem;
+  padding: 1.2rem;
   margin: 0.5rem;
-  background-color: #BDD537;
-  color: white;
+  background-color: #ffffff;
+  color: #000000;
   font-weight: bold;
   font-size: 0.95rem;
   border: none;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
 .dateBtn:hover {
-  background-color: #97aa2c; /* 20% svart overlay */
+  background-color: #7292b1; 
+  color: white
 
 }
 
 .dateBtn.active {
-  background-color: #97aa2c; /* 20% svart overlay */
+  background-color: #7292b1;
+  color: white;
 }
 
-.dateBtn.dateBtn.active::before {
-  content: "✔ ";
+.dateBtn.dateBtn.active::after {
+  margin-left: 0.4rem;
+  content: " ✔ ";
 }
+
+.narrowSearchForm {
+  display: none;
+}
+
+.narrowSearchForm.active {
+  display: block;
+}
+
 
 /*----------------------------------- SINGLE PAGE -----------------------------------*/
 
