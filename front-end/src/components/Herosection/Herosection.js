@@ -1,6 +1,7 @@
-import { Typography, Box, Button} from "@mui/material";
+import { Typography, Box, Button, Card, } from "@mui/material";
 import { CategorySelect } from '../CategorySelect/CategorySelect'
 import { TravelSelect } from '../TravelSelect/TravelSelect'
+import { ResultCard } from '../ResultCard/ResultCard'
 import { DateSelect } from '../DateSelect/DateSelect'
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
@@ -125,7 +126,9 @@ function Herosection(props) {
       {result && start && end && category && company ? result.map((e, i) => {
           return (
             <Link key={`res-${i}`} to='/page' onMouseEnter={() => handleResultClick(e.cityName, e.activity)}>
-              <Typography variant="h5">{e.cityName}</Typography>
+              <ResultCard obj={e.cityName}>
+                <Typography variant="h5">{e.cityName}</Typography>
+              </ResultCard>
             </Link>
             );
       }) : ''}

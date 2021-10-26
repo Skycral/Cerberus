@@ -5,10 +5,10 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 
 
-export function CityFetch(props) {
+export function ResultCard(props) {
 
   // "OBJEKTET"
-  const city = props.obj.city;
+  const city = props.obj;
 
   const [result, setResult] = useState();
   
@@ -28,23 +28,20 @@ export function CityFetch(props) {
     
   };
 
-    console.log(result)
-
   useEffect(() => {fetcher()}, []);
 
   return (
-    <Card sx={{ maxWidth: 800, margin: 'auto', mb: '5rem', mt: '3rem' }}>
-      <div className='cityfetch'>
+    <Card sx={{ maxWidth: 400, margin: 'auto', mb: '1rem', mt: '2rem' }}>
+      <div className='resultCard'>
         <div className='cityFetchImg'>
           {result ? <img src={result.originalimage.source} alt={result.description}></img> : ''}
         </div>
-        <div className='cityfetchText'>
-          <h1>{city}</h1>
-          <p>{result ? result.extract : ''}</p>
+        <div className='resultCardText'>
+          <h4>{result ? result.title : ''}</h4>
+          <p>{result ? result.extract.substring(0, 100) : ''}</p>
         </div>
-      </div>
+       </div>
     </Card>
   );
 
 }
-
