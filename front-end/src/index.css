@@ -224,6 +224,7 @@ div.singlePageContainer {
 
 .activityHeader {
   margin-top: 2rem;
+  margin-bottom: 1rem;
   color:rgb(41, 112, 49);
   width: 100%;
   text-align: center;
@@ -278,4 +279,9 @@ div.singlePageContainer {
 
 .eventfetch p {
   margin-bottom: 0.5rem;
+}
+
+.eventImage {
+  height: 40px;
+  border-radius: 5px;
 }

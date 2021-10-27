@@ -44,32 +44,21 @@ export function EventFetch(props) {
   //Fetchar data när sidan hämtas
   useEffect(() => {fetcher()}, []);
 
-  function createEventData(date, time, name) {
-    return { date, time, name };
-  }
-  
-  const rows = [
-    createEventData('Frozen yoghurt', 159, 6.0),
-    createEventData('Ice cream sandwich', 237, 9.0),
-    createEventData('Eclair', 262, 16.0),
-    createEventData('Cupcake', 305, 3.7),
-    createEventData('Gingerbread', 356, 16.0),
-  ];
-
   return(
     <div className="eventfetch">
       <Divider variant="middle" sx={{width: '75%', mb: '2rem', alignSelf: 'center', backgroundColor: 'rgba(41, 112, 49, 0.5)'}} />
     
       <h1 className='activityHeader'>
-        Event i {searchObject.city} mellan {searchObject.startDate.substring(0, 10)} och {searchObject.endDate.substring(0, 10)}
+      { result ?  `Evenemang i ${searchObject.city} mellan ${searchObject.startDate.substring(0, 10)} och ${searchObject.endDate.substring(0, 10)}`
+      : `Hittar inga evenemang i ${searchObject.city} under valda tidsperiod`}
       </h1>
 
-      <Card sx={{ maxWidth: 800, margin: 'auto', mb: '5rem', mt: '1rem' }}>
+       { result ? <Card sx={{ width: '80%', margin: 'auto', mb: '5rem', mt: '2rem' }}>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="event table" size='medium'>
           <TableHead>
             <TableRow>
-
+              <TableCell sx={{fontWeight: 'bold'}}></TableCell>
               <TableCell sx={{fontWeight: 'bold'}}>Datum</TableCell>
               <TableCell sx={{fontWeight: 'bold'}}>Tid</TableCell>
               <TableCell sx={{fontWeight: 'bold'}}>Evenemang</TableCell>
@@ -84,7 +73,9 @@ export function EventFetch(props) {
               key={`${e}-${i}`}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-
+                <TableCell align='center'>
+                  {e.dates.start.localDate ? <img src={e.images[0].url} className='eventImage' alt='' /> : ''}
+                </TableCell>
                 <TableCell>
                   {e.dates.start.localDate ? e.dates.start.localDate : ''}
                 </TableCell>
@@ -95,14 +86,14 @@ export function EventFetch(props) {
                   {e.name ? e.name : ''}
                 </TableCell>
                 <TableCell align="left">
-                  <Button href={e.url}>Boka</Button>
+                  <Button href={e.url} sx={{color:'rgb(41, 112, 49)'}}>Boka</Button>
                 </TableCell>
               </TableRow>
             )) : ''}
           </TableBody>
         </Table>
       </TableContainer>
-      </Card>
+      </Card> : ''}
     </div>
 
     
