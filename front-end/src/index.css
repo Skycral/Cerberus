@@ -106,12 +106,10 @@ code {
 }
 
 .resultCardImg {
-  max-height: 150px;
-  max-width: 150px;
+  max-width: 250px;
   margin-right: 2rem;
   align-self: center;
-  overflow: hidden;
-  border-radius: 20px;
+  object-fit: cover;
 }
 
 .resultCardText {
@@ -120,7 +118,10 @@ code {
 }
 
 .resultCardImg img {
-object-fit: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
 }
 
 /*----------------------------------- DATE SELECT -----------------------------------*/
