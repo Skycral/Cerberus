@@ -17,6 +17,7 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact path='/'>
+        <Header />
             <Herosection func={handleSearch}/>
           <Footer />
         </Route>

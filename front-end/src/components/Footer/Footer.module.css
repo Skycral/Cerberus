@@ -3,17 +3,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: black;
+  color: rgb(41, 112, 49);
   bottom: 0;
   left: 0;
-  height: 100px;
   width: 100%;
-  margin-top: 100vh;
-  background-color: rgb(141, 187, 144);
+  background-color: rgb(255, 255, 255);
+  padding: 5vh;
+  box-shadow: 0 6px 20px rgba(41, 112, 49, 0.3)
 }
 
 .FooterTitle {
   font-weight: 700;
   font-size: calc(10px + 2vmin);
-  color: black;
+  color: rgb(41, 112, 49);
 }

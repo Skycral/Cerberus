@@ -6,19 +6,21 @@
 
 .Header {
   display: flex;
-  color: white;
+  color: black;
+  background-color: rgb(255, 255, 255);
   padding: 2rem;
+  box-shadow: 0 10px 30px rgba(14, 24, 10, 0.9)
 }
 
 .HeaderTitle {
   font-weight: 700;
   font-size: calc(10px + 3vmin);
-  color: white;
+  color: rgb(41, 112, 49);
   margin-bottom: 0;
 }
 
 .MainNav a {
-  color: black;
+  color: rgb(41, 112, 49);
   text-decoration: none;
 }
 

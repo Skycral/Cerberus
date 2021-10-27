@@ -1,6 +1,7 @@
 import { CityFetch } from "../components/CityFetch/CityFetch";
 import { ActivityFetch } from "../components/ActivityFetch/ActivityFetch";
 import { EventFetch } from "../components/EventFetch/EventFetch";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from "react-router-dom";
 
 
@@ -14,12 +15,13 @@ export function SinglePage(props) {
     searchObject = JSON.parse(window.localStorage.getItem('search'));
   }
 
+
   console.log(searchObject)
 
   return(
     <div className='singlePageContainer'>
-      <img className='background' src='images/background.jpeg' alt=''/>
-      <Link to="/">Tillbaka</Link>
+      <img className='background' src={`images/${searchObject.city}.jpg`} alt=''/>
+      <Link to="/"><ArrowBackIcon Filled sx={{fontSize: '4rem', color: 'rgb(41, 112, 49)'}} /></Link>
       <CityFetch obj={searchObject}/>
       <ActivityFetch obj={searchObject}/>
       <EventFetch obj={searchObject}/>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import settings from '../../settings.json';
 import * as React from 'react';
-import {Card, CardActions, CardContent, CardMedia, Button, Typography, Box, CircularProgress}from '@mui/material';
+import {Card, CardActions, CardContent, CardMedia, Button, Typography, Box, CircularProgress, Divider}from '@mui/material';
 
 
 export function ActivityFetch(props) {
@@ -40,15 +40,16 @@ export function ActivityFetch(props) {
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
+        backgroundColor: 'rgba(255, 255, 255, 0.95)'
       }}
     >
-      <Typography variant="h3" align="center" component="h2" gutterBottom  sx={{width: "100%"}}>
+      <h1 className='activityHeader'>
         {activity === 'Fine dining' ? 'Mat & dryck' : activity} i {city}
-      </Typography>
+      </h1>
 
     {result ? result.details.map((e, i) => {
       return (
-        <Card key={`activity-${i}`} sx={{ width: 345, height: 345, margin: '2rem' }}>
+        <Card key={`activity-${i}`} sx={{ width: 345, height: 345, margin: '2rem', color: 'rgb(41, 112, 49)'}}>
         <CardMedia
           component="img"
           height="150"
@@ -64,8 +65,8 @@ export function ActivityFetch(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button href={e.result.url} size="small">Google maps</Button>
-          <Button href={e.result.website} size="small">Hemsida</Button>
+          <Button sx={{color: 'rgb(41, 112, 49)'}} href={e.result.url} size="small">Google maps</Button>
+          <Button sx={{color: 'rgb(41, 112, 49)'}} href={e.result.website} size="small">Hemsida</Button>
         </CardActions>
       </Card>
       );

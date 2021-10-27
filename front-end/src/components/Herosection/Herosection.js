@@ -1,6 +1,5 @@
 import { Typography, Button, Stack, Chip } from "@mui/material";
 import { CategorySelect } from '../CategorySelect/CategorySelect'
-import { Header } from "../Header/Header";
 import { TravelSelect } from '../TravelSelect/TravelSelect'
 import { ResultCard } from '../ResultCard/ResultCard'
 import { DateSelect } from '../DateSelect/DateSelect'
@@ -107,13 +106,13 @@ function Herosection(props) {
   };
 
   return (
-    <div className='heroContainer'>
-      <img className='background' src='images/background.jpeg' alt=''/>
+    <div className='container'>
+      <div className='heroContainer'>
+      <video className='background' src='images/bakgrundsvideo.mp4' autoPlay loop muted alt=''/>
         <div className='box'>
         <div className='heroBox'>
-        <Header />
+        <DateSelect func={updatePeriod}/>
           <div className='filters'>
-            <DateSelect func={updatePeriod}/>
             {categories ? (
               <CategorySelect 
                 className='categoryHero'
@@ -129,8 +128,9 @@ function Herosection(props) {
                 value={company ? company : ''}/>
             </div>
           <Button
-            sx={{height: '50%', justifySelf: 'center', alignSelf: 'center'}}
+            sx={{height: '50%', width: '50%', mb: '2rem', justifySelf: 'center', alignSelf: 'center'}}
             variant="contained"
+            color='success'
             onClick={() => {
               handleClick(category, company, start, end)
             }}>
@@ -142,7 +142,7 @@ function Herosection(props) {
         {start && end ? 
                 <Stack direction="row" spacing={1} sx={{marginBottom: '2rem', marginRight: '1rem'}}>
                 <Chip
-                sx={{color: 'white'}}
+                sx={{color: 'black', backgroundColor: 'white'}}
                 label={`${start}-${end}`}
                 variant="outlined"
                 onClick={''}
@@ -153,7 +153,7 @@ function Herosection(props) {
               {category ? 
               <Stack direction="row" spacing={1} sx={{marginBottom: '2rem', marginRight: '1rem'}}>
                 <Chip
-                sx={{color: 'white'}}
+                sx={{color: 'black', backgroundColor: 'white'}}
                 label={category}
                 variant="outlined"
                 onClick={''}
@@ -164,7 +164,7 @@ function Herosection(props) {
               {company ?
               <Stack direction="row" spacing={1} sx={{marginBottom: '2rem', marginRight: '1rem'}}>
                 <Chip
-                sx={{color: 'white'}}
+                sx={{color: 'black', backgroundColor: 'white'}}
                 label={company}
                 variant="outlined"
                 onClick={''}
@@ -173,15 +173,24 @@ function Herosection(props) {
                 </Stack>
               : ''}
               </div>
-              
+          </div>
         </div>
         {result && start && end && category && company ? result.map((e, i) => {
             return (
-              <Link key={`res-${i}`} to='/page' onMouseEnter={() => handleResultClick(e.cityName, e.activity)}>
+              <div>
+                
                 <ResultCard obj={e.cityName}>
-                  <Typography variant="h5">{e.cityName}</Typography>
+                  <Link key={`res-${i}`} to='/page' onMouseEnter={() => handleResultClick(e.cityName, e.activity)}>
+                  <Button
+                    sx={{borderRadius: '20px', mt: '2rem', justifySelf: 'center', alignSelf: 'center', float: 'right'}}
+                    variant="contained"
+                    color='success'>Välj destination
+                    </Button>
+                  </Link>
                 </ResultCard>
-              </Link>
+                
+                
+              </div>
               );
         }) : ''}
       </div>
