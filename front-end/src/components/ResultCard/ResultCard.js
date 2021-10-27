@@ -35,7 +35,7 @@ export function ResultCard(props) {
     <Card sx={{maxHeight: '100%', maxWidth: '75%', margin: 'auto', borderRadius: '20px', boxShadow: '0 6px 20px rgba(41, 112, 49, 0.3)', filter: 'drop-shadow(0 6px 20px rgba(41, 112, 49, 0.3))'}}>
       <div className='resultCard'>
         <div className='resultCardImg'>
-          {result ? <img className='cardImg' src={result.originalimage.source} alt={result.description}></img> : ''}
+          {result ? <img className='cardImg' src={`images/${result.title}.jpg`} alt={result.description}></img> : ''}
         </div>
         <div className='resultCardText'>
           <h3>{result ? result.title : ''}</h3>
