@@ -24,9 +24,10 @@ export const CategorySelect = ({
   
     return (
       <FormControl sx={{marginRight: '2rem', backgroundColor: 'white'}} fullWidth>
-        <InputLabel id="simple-select-label">Resekategori</InputLabel>
+        <InputLabel id="demo-customized-select-label">Resekategori</InputLabel>
         <Select
-          labelId="simple-select-label"
+          labelId="demo-customized-select-label"
+          id="demo-customized-select"
           value={value}
           label="Category"
           variant="filled"

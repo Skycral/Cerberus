@@ -33,17 +33,16 @@ export function CityFetch(props) {
   useEffect(() => {fetcher()}, []);
 
   return (
-    <Card sx={{ maxWidth: 800, margin: 'auto', mb: '5rem', mt: '3rem' }}>
+    <div className='cityFetchContainer'>
+    <Card sx={{width: '75%', margin: 'auto', mb: '5rem', mt: '3rem', boxShadow: '0 6px 20px rgba(0, 0, 0, 0.3)', filter: 'drop-shadow(0 6px 20px rgba(0, 0, 0, 0.3))'}}>
       <div className='cityfetch'>
-        <div className='cityFetchImg'>
-          {result ? <img src={result.originalimage.source} alt={result.description}></img> : ''}
-        </div>
         <div className='cityfetchText'>
           <h1>{city}</h1>
           <p>{result ? result.extract : ''}</p>
         </div>
       </div>
     </Card>
+    </div>
   );
 
 }

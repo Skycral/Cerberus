@@ -10,6 +10,7 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100vh;
 }
 
 body {
@@ -46,7 +47,6 @@ code {
 }
 
 .MuiBox-root {
-  margin-bottom: 100px; 
   display: flex; 
   flex-direction: column;
   justify-content: center;
@@ -54,12 +54,20 @@ code {
   text-align: center;
 }
 
+.heroContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 4rem;
+}
+
 .box {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(12, 12, 12, 0.5);
+  background-color: rgba(12, 12, 12, 0.65);
+  width: 50%;
 }
 
 .heroResults {
@@ -71,13 +79,14 @@ code {
 
 .heroBox {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
 
 .filters {
-  width: 40%;
+  width: 50%;
   margin: 2rem;
   display: flex;
   align-items: center;
@@ -91,21 +100,39 @@ code {
   display: flex;
 }
 
-.resultCardText p:link, .resultCardText p:visited {
-  text-decoration: none;
+.resultContainer {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
 }
 
+.resultCardImg {
+  max-height: 150px;
+  max-width: 150px;
+  margin-right: 2rem;
+  align-self: center;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.resultCardText {
+  height: 100%;
+  width: 100%;
+}
+
+.resultCardImg img {
+object-fit: cover;
+}
 
 /*----------------------------------- DATE SELECT -----------------------------------*/
 .dateDropdown {
   position: relative;
   display: inline-block;
-  width: 75%;
-  margin-right: 10rem;
+  margin-top: 2rem;
 }
 
 .dateDropdownContent {
   position: absolute;
+  left: -125%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -114,7 +141,7 @@ code {
   min-width: 50vw;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   padding: 12px 16px;
-  z-index: 1;
+  z-index: 999;
 }
 
 .hidden {
@@ -133,13 +160,13 @@ code {
 }
 
 .dateBtn:hover {
-  background-color: #7292b1; 
+  background-color: rgb(41, 112, 49); 
   color: white
 
 }
 
 .dateBtn.active {
-  background-color: #7292b1;
+  background-color: rgb(41, 112, 49);
   color: white;
 }
 
@@ -160,7 +187,7 @@ code {
 /*----------------------------------- SINGLE PAGE -----------------------------------*/
 
 div.singlePageContainer {
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -175,30 +202,32 @@ div.singlePageContainer {
   padding: 2rem;  
 }
 
-.cityFetchImg {
-  height: 200px;
-  width: 200px;
-  border-radius: 50%;
-  margin-right: 2rem;
-  align-self: center;
-  overflow: hidden;
-}
-
-.cityfetch img {
-  object-fit: cover; 
+.cityFetchContainer {
+  height: 75vh;
+  display: flex;
+  align-items: center;
 }
 
 
 .cityfetchText {
   align-self: center;
-  width: 500px;
+
 }
 
 .cityfetchText h1 {
   margin-bottom: 0.5rem;
+  color: rgb(41, 112, 49);
 }
 
+
 /*----------------------------------- ACTIVITY PRESENTATION -----------------------------------*/
+
+.activityHeader {
+  margin-top: 2rem;
+  color:rgb(41, 112, 49);
+  width: 100%;
+  text-align: center;
+}
 
 .activityfetch {
   min-width: 90%;
@@ -235,8 +264,8 @@ div.singlePageContainer {
 /*----------------------------------- EVENT PRESENTATION -----------------------------------*/
 
 .eventfetch {
-  min-width: 90%;
-  max-width: 800px;
+  background-color: rgba(255, 255, 255, 0.95);
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

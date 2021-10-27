@@ -51,11 +51,16 @@ export function DateSelect(props) {
     },[startDate, endDate])
 
     useEffect(() => {
-        if (days && dateRange && days > 2) {
+        if (days < 3) {
+            setUserMessage(
+                'Ange minst 3 dagar'
+            );
+            setDays();
+        } else if (days && dateRange && days > 2) {
             handleClick(days, dateRange)
             setUserMessage(
-                `Resultatet nedan ger mest "bang for the buck", du behöver ta ut 
-                ${days-freeDays > 0 ? days-freeDays : 'inte ta ut någon'} 
+                `Vi rekommenderar att du reser inom någon av följande perioder, du behöver
+                ${days-freeDays > 0 ? `ta ut ${days-freeDays}` : 'inte ta ut någon'} 
                 ${days-freeDays <= 1 ? 'semesterdag' : 'semesterdagar' }.`
             )
         };
@@ -146,7 +151,7 @@ export function DateSelect(props) {
                 variant="filled" 
                 label={'Antal dagar'} 
                 onChange={(e) => {setActive(true); setDays(e.target.value)}}
-                sx={{backgroundColor: 'white'}}
+                sx={{backgroundColor: 'white', color: 'rgb(41, 112, 49)'}}
             />
             { active, days ? 
             <div className='dateDropdownContent'>
@@ -154,7 +159,7 @@ export function DateSelect(props) {
                 variant="text" 
                 aria-label="Se fler resultat" 
                 size="medium"
-                sx={{display: 'block', mx: 'auto'}}
+                sx={{display: 'block', mx: 'auto', color: 'rgb(41, 112, 49)'}}
                 onClick={() => {
                     document.querySelector('.narrowSearchForm').classList.toggle('active');
                 }}

@@ -9,7 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 
 export function EventFetch(props) {
@@ -58,10 +58,11 @@ export function EventFetch(props) {
 
   return(
     <div className="eventfetch">
+      <Divider variant="middle" sx={{width: '75%', mb: '2rem', alignSelf: 'center', backgroundColor: 'rgba(41, 112, 49, 0.5)'}} />
     
-      <Typography variant="h4" align="center" component="h2"  sx={{width: "100%"}}>
+      <h1 className='activityHeader'>
         Event i {searchObject.city} mellan {searchObject.startDate.substring(0, 10)} och {searchObject.endDate.substring(0, 10)}
-      </Typography>
+      </h1>
 
       <Card sx={{ maxWidth: 800, margin: 'auto', mb: '5rem', mt: '1rem' }}>
         <TableContainer component={Paper}>
