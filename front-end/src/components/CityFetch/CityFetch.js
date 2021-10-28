@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import settings from '../../settings.json';
 
 import * as React from 'react';
-import Card from '@mui/material/Card';
+import {Card, CircularProgress} from '@mui/material/';
 
 
 export function CityFetch(props) {
@@ -28,12 +28,12 @@ export function CityFetch(props) {
     
   };
 
-    console.log(result)
-
   useEffect(() => {fetcher()}, []);
 
   return (
+    
     <div className='cityFetchContainer'>
+    {result ? (
     <Card sx={{width: '75%', margin: 'auto', mb: '5rem', mt: '3rem', boxShadow: '0 6px 20px rgba(0, 0, 0, 0.3)', filter: 'drop-shadow(0 6px 20px rgba(0, 0, 0, 0.3))'}}>
       <div className='cityfetch'>
         <div className='cityfetchText'>
@@ -42,7 +42,10 @@ export function CityFetch(props) {
         </div>
       </div>
     </Card>
-    </div>
+    )
+      
+      :  <CircularProgress />}
+</div>
   );
 
 }

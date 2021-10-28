@@ -74,7 +74,6 @@ routes.get("/places/:what/:city", async (req, res) => {
     headers: { }
   };
   const geoResult = await axios(geoConfig);
-  console.log(geoResult.data.results[0].geometry.location)
 
   const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?location=${geoResult.data.results[0].geometry.location.lat}00%2C${geoResult.data.results[0].geometry.location.lng}00&radius=20000&query=${encodeURI(req.params.what)}&key=${googleKey}`
   const config = {
@@ -84,8 +83,6 @@ routes.get("/places/:what/:city", async (req, res) => {
   };
 
   const result = await axios(config);
-
- console.log(result.data)
 
   const detailsUrl1 = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${result.data.results[0].place_id}&key=${googleKey}`
   const detailsConfig1 = {

@@ -31,7 +31,6 @@ export function EventFetch(props) {
       })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setResult(data._embedded.events);
         })
       .catch(e => console.log(e));

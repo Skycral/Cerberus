@@ -48,7 +48,6 @@ function Herosection(props) {
   }, [city, activity]);
 
   useEffect(() => {
-    console.log(searchObject);
     props.func(searchObject);
   }, [searchObject]);
 
@@ -72,7 +71,6 @@ function Herosection(props) {
       //const response = await (await fetch(`${settings.backend}/activities/${category}`)).json();
       const response = await (await fetch(`${settings.backend}/result/${company}/${category}/${start}/${end}`)).json();
       setResult(response);
-      console.log(response);
     } catch (e) {
       console.log(e);
     }

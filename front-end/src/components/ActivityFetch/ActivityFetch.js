@@ -29,7 +29,6 @@ export function ActivityFetch(props) {
   };
  
   useEffect(() => {fetcher()}, []);
-  console.log(result)
 
   return (
     <Box

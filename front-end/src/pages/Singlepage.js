@@ -3,6 +3,7 @@ import { ActivityFetch } from "../components/ActivityFetch/ActivityFetch";
 import { EventFetch } from "../components/EventFetch/EventFetch";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 
 export function SinglePage(props) {
@@ -15,8 +16,9 @@ export function SinglePage(props) {
     searchObject = JSON.parse(window.localStorage.getItem('search'));
   }
 
-
-  console.log(searchObject)
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [searchObject])
 
   return(
     <div className='singlePageContainer'>

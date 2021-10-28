@@ -13,10 +13,15 @@
 }
 
 .HeaderTitle {
+  width: 300px;
   font-weight: 700;
-  font-size: calc(10px + 3vmin);
+  font-size: 2rem;
   color: rgb(41, 112, 49);
   margin-bottom: 0;
+}
+
+.Byline {
+  margin-left: 2rem
 }
 
 .MainNav a {

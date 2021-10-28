@@ -44,7 +44,6 @@ const getActivities = async (category) => {
     // const query = "SELECT cities.cityName, categories.category FROM cityactivities INNER JOIN cities ON cities.cityName = cityactivities.city INNER JOIN activities ON activities.activityId = cityactivities.actId WHERE categories.category=? GROUP BY cities.cityName;"
     const query = "SELECT cities.cityName, activities.activity FROM cityactivities INNER JOIN cities ON cities.cityCode = cityactivities.city INNER JOIN activities ON activities.activityId = cityactivities.actId INNER JOIN categories ON categories.categoryId = cityactivities.catId WHERE categories.category=? GROUP BY cities.cityName;"
     const result = await dbCon.all(query, [category]);
-    console.log(result);
     return result;
   } catch (error){
     console.log(error)
@@ -66,7 +65,7 @@ const getResult = async (company, category, start, end) => {
     if(start.substring(0, 4) === end.substring(0, 4)) {
      query = 
      `SELECT cities.cityName, activities.activity
-      FROM cityactivities 
+      FROM cityactivities
       INNER JOIN cities ON cities.cityCode = cityactivities.city 
       INNER JOIN activities ON activities.activityId = cityactivities.actId 
       INNER JOIN categories ON categories.categoryId = cityactivities.catId
@@ -78,7 +77,6 @@ const getResult = async (company, category, start, end) => {
       AND ? <= toDate))
       GROUP BY cities.cityName;`
       const result = await dbCon.all(query, [category, start, end, secondStartYear, secondEndYear]);
-      console.log(result);
       return result;
 
     } else {
@@ -94,7 +92,6 @@ const getResult = async (company, category, start, end) => {
       AND ? <= toDate
       GROUP BY cities.cityName;`
       const result = await dbCon.all(query, [category, start, end]);
-      console.log(result);
       return result;
 
     }
